@@ -1,0 +1,14 @@
+{
+  "messages": [
+    {
+      "id": 1,
+      "from": "zirseaz",
+      "to": "test_agent",
+      "content": "Hola test",
+      "type": "info",
+      "timestamp": "2026-05-10T21:49:21",
+      "read": false
+    }
+  ],
+  "channels": {}
+}

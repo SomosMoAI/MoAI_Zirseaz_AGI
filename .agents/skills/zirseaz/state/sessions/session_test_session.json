@@ -1,0 +1,12 @@
+{
+  "session_id": "test_session",
+  "model": "test-model",
+  "saved_at": "2026-05-10T21:43:16",
+  "message_count": 1,
+  "messages": [
+    {
+      "role": "system",
+      "content": "test"
+    }
+  ]
+}

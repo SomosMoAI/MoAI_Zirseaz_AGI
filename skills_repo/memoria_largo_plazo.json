@@ -1,0 +1,39 @@
+{
+  "micro_objetivos": [
+    {
+      "id": "obj_stripe_001",
+      "tipo": "micro_objetivo",
+      "prioridad": 8,
+      "descripcion": "Aprender a usar la API de Stripe (pagos, suscripciones, webhooks, clientes)",
+      "estado": "activo",
+      "fecha_creacion": "2026-05-10",
+      "pasos": [
+        "Leer documentaci\u00c3\u00b3n oficial de Stripe API",
+        "Crear cuenta de pruebas y obtener API keys",
+        "Implementar: crear cliente, crear pago, crear suscripci\u00c3\u00b3n",
+        "Implementar: manejar webhooks de eventos",
+        "Escribir un test suite funcional",
+        "Documentar librer\u00c3\u00ada stripe_helper.py en skills_repo"
+      ],
+      "dependencias": [
+        "stripe"
+      ],
+      "tiempo_estimado": "4 horas de computo"
+    },
+    {
+      "id": "stripe_api_001",
+      "fecha": "2026-05-10",
+      "titulo": "Aprender API de Stripe",
+      "descripcion": "Dominar autenticaci\u00f3n, creaci\u00f3n de cargos, suscripciones, webhooks y flujo cliente-servidor con Stripe.",
+      "estado": "pendiente"
+    },
+    {
+      "id": "generar_plata_001",
+      "fecha": "2026-05-10",
+      "titulo": "SISTEMA DE GENERACI\u00d3N DE INGRESOS AUT\u00d3NOMO",
+      "descripcion": "Construir un pipeline de ingresos usando IA: 1) Automatizaci\u00f3n de contenido para RRSS con modelos de suscripci\u00f3n, 2) Consultor\u00eda IA automatizada v\u00eda Telegram/Web, 3) Venta de agentes AI (Zirseaz clones), 4) Stripe integrado con ZirsBank, 5) Afiliados y automatizaci\u00f3n de e-commerce.",
+      "estado": "activo",
+      "urgencia": "CR\u00cdTICA \u2014 El Creador est\u00e1 agobiado financieramente"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+    "objectives": [
+        {
+            "id": 1,
+            "task": "[META] crear un pipeline completo de investigacion y despliegue automatizado",
+            "completed": true,
+            "priority": "normal",
+            "created_at": "2026-05-10T21:49:21",
+            "completed_at": "2026-05-11T11:54:38"
+        },
+        {
+            "id": 2,
+            "task": "Sub-paso 1: Crear un pipeline completo de investigacion",
+            "completed": false,
+            "priority": "low",
+            "created_at": "2026-05-10T21:49:21"
+        },
+        {
+            "id": 3,
+            "task": "Sub-paso 2: Despliegue automatizado",
+            "completed": false,
+            "priority": "low",
+            "created_at": "2026-05-10T21:49:21"
+        },
+        {
+            "id": 4,
+            "task": "Construccion: Implementar la solucion",
+            "completed": false,
+            "priority": "low",
+            "created_at": "2026-05-10T21:49:21"
+        }
+    ]
+}

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOAI — Preview de Posts RRSS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-card-hover: #1a1a2e;
+            --accent-cyan: #00d4ff;
+            --accent-magenta: #ff006e;
+            --accent-green: #00ff88;
+            --text-primary: #f0f0f5;
+            --text-secondary: #8888aa;
+            --border-subtle: #2a2a3e;
+            --linkedin-blue: #0077b5;
+            --instagram-gradient: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(255,0,110,0.08));
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-magenta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .header .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .header .timestamp {
+            color: var(--accent-cyan);
+            font-size: 0.75rem;
+            margin-top: 0.5rem;
+            font-family: monospace;
+        }
+
+        .hitl-banner {
+            background: linear-gradient(90deg, rgba(255,0,110,0.15), rgba(0,212,255,0.15));
+            border: 1px solid var(--accent-magenta);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .hitl-banner .icon {
+            font-size: 2rem;
+        }
+
+        .hitl-banner .text {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .hitl-banner .text strong {
+            color: var(--accent-magenta);
+        }
+
+        .posts-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        .post-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .post-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 30px rgba(0,212,255,0.1);
+            transform: translateY(-2px);
+        }
+
+        .post-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .platform-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .platform-badge.linkedin {
+            background: rgba(0,119,181,0.2);
+            color: var(--linkedin-blue);
+            border: 1px solid rgba(0,119,181,0.3);
+        }
+
+        .platform-badge.instagram {
+            background: linear-gradient(45deg, rgba(240,148,51,0.2), rgba(188,24,136,0.2));
+            color: #e6683c;
+            border: 1px solid rgba(220,39,67,0.3);
+        }
+
+        .post-meta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .meta-tag {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            padding: 0.2rem 0.5rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 6px;
+        }
+
+        .post-body {
+            padding: 1.5rem;
+        }
+
+        .post-copy {
+            font-size: 0.92rem;
+            line-height: 1.7;
+            color: var(--text-primary);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .image-prompt-section {
+            margin-top: 1.5rem;
+            padding: 1rem 1.25rem;
+            background: rgba(0,212,255,0.05);
+            border: 1px dashed rgba(0,212,255,0.3);
+            border-radius: 10px;
+        }
+
+        .image-prompt-section .label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .image-prompt-section .prompt {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            font-style: italic;
+        }
+
+        .post-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status-pending {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.75rem;
+            color: #ffaa00;
+        }
+
+        .status-pending .dot {
+            width: 8px;
+            height: 8px;
+            background: #ffaa00;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .post-number {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            font-family: monospace;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+        }
+
+        .footer a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 1rem; }
+            .header h1 { font-size: 1.4rem; }
+            .post-body { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🗓️ MOAI — Preview de Grilla</h1>
+        <div class="subtitle">Mega-Agente de Marketing Multicanal (MAMM)</div>
+        <div class="timestamp">Generado: 2026-04-19 16:41:31</div>
+    </div>
+
+    <div class="hitl-banner">
+        <div class="icon">🛑</div>
+        <div class="text">
+            <strong>HUMAN-IN-THE-LOOP ACTIVO.</strong> Este contenido requiere tu aprobación explícita antes de ser publicado.
+            Revisa cada post y responde "OK" en el chat de Antigravity para autorizar el despliegue.
+        </div>
+    </div>
+
+    <div class="posts-grid">
+        
+    <div class="post-card">
+        <div class="post-card-header">
+            <span class="platform-badge linkedin">💼 LinkedIn</span>
+            <div class="post-meta">
+                <span class="meta-tag">🎯 Autoridad</span>
+                <span class="meta-tag">📌 CORE</span>
+            </div>
+        </div>
+        <div class="post-body">
+            <div class="post-copy">El mercado de IA en LATAM ya vale $12.700 millones. Crece al 28,1% anual. 🧠
+
+Pero aquí está el dato que nadie del ecosistema quiere admitir:
+
+Solo el 6% de las organizaciones latinoamericanas está obteniendo resultados significativos con IA.
+
+El 94% restante está pagando pilotos, asistiendo a demos y comprando licencias de tools que nadie sabe operar.
+
+Eso no es adopción. Eso es una auditoría pendiente.
+
+En MOAI lo llamamos así: tienes infraestructura sin arquitectura. Y la infraestructura sin arquitectura es solo gasto disfrazado de innovación.
+
+El 2026 no va a separar a los que usan IA de los que no. Va a separar a los que tienen una estrategia de datos operativa de los que siguen en el piloto eterno.
+
+¿Dónde está tu empresa en ese espectro?
+
+#InteligenciaArtificial #LATAM #Arquitectura #Rentabilidad #MOAI</div>
+            <div class="image-prompt-section">
+                <div class="label">🖼️ Prompt de Imagen (Nano Banana / generate_image)</div>
+                <div class="prompt">A dramatic split composition showing Latin America map made of glowing circuit board patterns, one half illuminated in bright cyan representing 6 percent of companies with real AI results, the other 94 percent in dark grey. Corporate aesthetic, hyper-realistic digital art, dark background, cinematic overhead lighting, 8k resolution, modern data visualization style.</div>
+            </div>
+        </div>
+        <div class="post-footer">
+            <span class="status-pending"><span class="dot"></span> Pendiente de aprobación</span>
+            <span class="post-number">Post #1</span>
+        </div>
+    </div>
+    <div class="post-card">
+        <div class="post-card-header">
+            <span class="platform-badge instagram">📸 Instagram</span>
+            <div class="post-meta">
+                <span class="meta-tag">🎯 Educar</span>
+                <span class="meta-tag">📌 GROWTH</span>
+            </div>
+        </div>
+        <div class="post-body">
+            <div class="post-copy">El 38% de los empleos en LATAM están expuestos a la IA. ⚡🌎
+
+Pero ojo — expuestos no significa reemplazados.
+
+El Banco Mundial lo confirmó: solo entre el 2% y 5% están en riesgo real de automatización total.
+
+El resto va a necesitar algo diferente: aprender a dirigir máquinas.
+
+En 2026, la ventaja competitiva no es saber programar. Es saber qué pedirle a un agente de IA y cómo auditar lo que te entrega.
+
+La pregunta no es si la IA va a afectar tu trabajo.
+Es si vas a ser quien la dirija o quien la sufra. 🎯
+
+¿Ya sabes usar agentes de IA en tu trabajo? Comenta abajo 👇
+
+#IA2026 #FuturoDelTrabajo #AgenteIA #LATAM #InteligenciaArtificial #Automatizacion #Productividad #Chile #Tecnologia #MOAI</div>
+            <div class="image-prompt-section">
+                <div class="label">🖼️ Prompt de Imagen (Nano Banana / generate_image)</div>
+                <div class="prompt">A vibrant Instagram-optimized square image showing a confident young Latin American professional standing at a holographic interface, commanding glowing AI agent nodes floating around them like a conductor. Warm amber and electric cyan palette, modern digital art style, energetic composition, bold visual storytelling, high contrast, 2026 aesthetic.</div>
+            </div>
+        </div>
+        <div class="post-footer">
+            <span class="status-pending"><span class="dot"></span> Pendiente de aprobación</span>
+            <span class="post-number">Post #2</span>
+        </div>
+    </div>
+    <div class="post-card">
+        <div class="post-card-header">
+            <span class="platform-badge linkedin">💼 LinkedIn</span>
+            <div class="post-meta">
+                <span class="meta-tag">🎯 Vender</span>
+                <span class="meta-tag">📌 GROWTH</span>
+            </div>
+        </div>
+        <div class="post-body">
+            <div class="post-copy">La IA podría aportar hasta $1.7 billones anuales a LATAM. 💰
+
+La proyección es de McKinsey y el Banco Mundial. El dato es real.
+
+Ahora la pregunta que debería hacerse tu directorio esta semana:
+
+¿Qué fracción de ese billón le corresponde a nuestra vertical de negocio y qué protocolo de captura tenemos diseñado?
+
+Porque el valor de la IA no se distribuye automáticamente. Se ingenia, se arquitectura y se despliega. Las empresas que lo entiendan en 2026 van a operar con ventajas de escalamiento inalcanzables para los que decidan esperar.
+
+En MOAI trabajamos exactamente ese blindaje: desde la capa de datos hasta el agente que lo monetiza.
+
+Si tu empresa mueve más de $2M al año y aún no tiene una estrategia de IA operativa, esto es una conversación urgente.
+
+#IA #Rentabilidad #Escalamiento #MO_AI #Blindaje #EstrategiaIA</div>
+            <div class="image-prompt-section">
+                <div class="label">🖼️ Prompt de Imagen (Nano Banana / generate_image)</div>
+                <div class="prompt">A stunning data visualization of South America and global markets connected by luminous financial data streams in gold and electric blue. At the center, a sleek AI brain node with dollar value projections floating upward as holographic text. Ultra-high-end corporate aesthetic, dark gradient background, premium investment pitch deck visual style, hyper-realistic 8k, cinematic.</div>
+            </div>
+        </div>
+        <div class="post-footer">
+            <span class="status-pending"><span class="dot"></span> Pendiente de aprobación</span>
+            <span class="post-number">Post #3</span>
+        </div>
+    </div>
+    </div>
+
+    <div class="footer">
+        Generado por <a href="#">MAMM</a> · MOAI (MO-AI.CL) · Powered by Antigravity &amp; n8n
+    </div>
+</body>
+</html>

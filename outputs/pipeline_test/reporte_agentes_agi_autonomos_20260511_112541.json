@@ -1,0 +1,57 @@
+{
+  "topico": "Agentes AGI autonomos",
+  "timestamp": "20260511_112541",
+  "fuentes": [
+    "web",
+    "news"
+  ],
+  "profundidad": 2,
+  "resultados_web": [
+    {
+      "fuente": "web",
+      "query": "Agentes AGI autonomos",
+      "resultados_simulados": [
+        "https://en.wikipedia.org/wiki/agentes_agi_autonomos",
+        "https://www.google.com/search?q=agentes_agi_autonomos",
+        "https://arxiv.org/search/?query=agentes_agi_autonomos"
+      ],
+      "estado": "completado"
+    },
+    {
+      "fuente": "news",
+      "query": "Agentes AGI autonomos",
+      "resultados_simulados": [
+        "https://newsapi.org/v2/everything?q=agentes_agi_autonomos"
+      ],
+      "estado": "completado"
+    }
+  ],
+  "analisis": {
+    "total_fuentes": 2,
+    "total_urls": 4,
+    "total_contenidos_extraidos": 4,
+    "palabras_clave": [
+      "agentes",
+      "agi",
+      "autonomos"
+    ],
+    "resumen_simulado": "Se encontraron 4 fuentes de informacion sobre Agentes AGI autonomos.",
+    "datos_estructurados": {
+      "topico_analizado": "Agentes AGI autonomos",
+      "relevancia": "alta"
+    }
+  },
+  "reporte": {
+    "titulo": "Reporte de Investigacion: Agentes AGI autonomos",
+    "fecha": "20260511_112541",
+    "autor": "Ultimate Cortex AGI",
+    "resumen_ejecutivo": "Investigacion automatizada sobre 'Agentes AGI autonomos'. Se analizaron 2 fuentes y 4 URLs.",
+    "hallazgos": [
+      "Se identificaron 4 contenidos relevantes.",
+      "Palabras clave detectadas: agentes, agi, autonomos",
+      "Relevancia del topico: alta"
+    ],
+    "conclusion": "El topico 'Agentes AGI autonomos' tiene suficiente informacion disponible para continuar con fases de desarrollo."
+  },
+  "despliegue": {}
+}

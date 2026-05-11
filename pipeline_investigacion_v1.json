@@ -1,0 +1,52 @@
+{
+  "pipeline_name": "investigacion_automatizada_v1",
+  "version": "1.0",
+  "created": "2026-05-11",
+  "description": "Pipeline de investigación automatizada que busca, extrae y resume información de la web",
+  "components": [
+    {
+      "name": "motor_busqueda",
+      "skills": [
+        "buscar_en_web",
+        "buscar_noticias_newsapi"
+      ],
+      "description": "Realiza búsquedas en múltiples fuentes"
+    },
+    {
+      "name": "extractor_contenido",
+      "skills": [
+        "leer_contenido_url",
+        "scrape_url",
+        "extraer_urls"
+      ],
+      "description": "Extrae y procesa contenido de URLs"
+    },
+    {
+      "name": "analizador_datos",
+      "skills": [
+        "enviar_peticion_get",
+        "contar_palabras",
+        "calcular_hash_archivo"
+      ],
+      "description": "Analiza y procesa los datos extraídos"
+    },
+    {
+      "name": "almacen_resultados",
+      "skills": [
+        "escribir_archivo",
+        "crear_carpeta",
+        "leer_archivo",
+        "listar_directorio"
+      ],
+      "description": "Almacena y organiza los resultados"
+    }
+  ],
+  "workflow": [
+    "1. Recibir consulta/tema de investigación",
+    "2. Buscar en web usando motor_busqueda",
+    "3. Extraer contenido de las URLs encontradas",
+    "4. Analizar y procesar la información",
+    "5. Generar resumen estructurado",
+    "6. Almacenar resultados en archivo JSON"
+  ]
+}

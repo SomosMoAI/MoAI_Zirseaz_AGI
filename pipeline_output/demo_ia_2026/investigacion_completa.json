@@ -1,0 +1,62 @@
+{
+  "proyecto": "demo_ia_2026",
+  "tema": "Inteligencia Artificial y Automatizacion",
+  "fecha_ejecucion": "2026-05-11T11:18:41.594654",
+  "total_articulos": 9,
+  "contenido": [
+    {
+      "url": "https://ejemplo.com/resultado_0.html",
+      "titulo": "Articulo sobre AGI avances 2026",
+      "contenido": "Contenido simulado para https://ejemplo.com/resultado_0.html...",
+      "fecha_extraccion": "2026-05-11T11:18:41.594556"
+    },
+    {
+      "url": "https://ejemplo.com/resultado_1.html",
+      "titulo": "Articulo sobre AGI avances 2026",
+      "contenido": "Contenido simulado para https://ejemplo.com/resultado_1.html...",
+      "fecha_extraccion": "2026-05-11T11:18:41.594589"
+    },
+    {
+      "url": "https://ejemplo.com/resultado_2.html",
+      "titulo": "Articulo sobre AGI avances 2026",
+      "contenido": "Contenido simulado para https://ejemplo.com/resultado_2.html...",
+      "fecha_extraccion": "2026-05-11T11:18:41.594595"
+    },
+    {
+      "url": "https://ejemplo.com/resultado_0.html",
+      "titulo": "Articulo sobre automatizacion inteligente",
+      "contenido": "Contenido simulado para https://ejemplo.com/resultado_0.html...",
+      "fecha_extraccion": "2026-05-11T11:18:41.594600"
+    },
+    {
+      "url": "https://ejemplo.com/resultado_1.html",
+      "titulo": "Articulo sobre automatizacion inteligente",
+      "contenido": "Contenido simulado para https://ejemplo.com/resultado_1.html...",
+      "fecha_extraccion": "2026-05-11T11:18:41.594604"
+    },
+    {
+      "url": "https://ejemplo.com/resultado_2.html",
+      "titulo": "Articulo sobre automatizacion inteligente",
+      "contenido": "Contenido simulado para https://ejemplo.com/resultado_2.html...",
+      "fecha_extraccion": "2026-05-11T11:18:41.594608"
+    },
+    {
+      "url": "https://ejemplo.com/resultado_0.html",
+      "titulo": "Articulo sobre machine learning pipelines",
+      "contenido": "Contenido simulado para https://ejemplo.com/resultado_0.html...",
+      "fecha_extraccion": "2026-05-11T11:18:41.594612"
+    },
+    {
+      "url": "https://ejemplo.com/resultado_1.html",
+      "titulo": "Articulo sobre machine learning pipelines",
+      "contenido": "Contenido simulado para https://ejemplo.com/resultado_1.html...",
+      "fecha_extraccion": "2026-05-11T11:18:41.594616"
+    },
+    {
+      "url": "https://ejemplo.com/resultado_2.html",
+      "titulo": "Articulo sobre machine learning pipelines",
+      "contenido": "Contenido simulado para https://ejemplo.com/resultado_2.html...",
+      "fecha_extraccion": "2026-05-11T11:18:41.594619"
+    }
+  ]
+}

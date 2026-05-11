@@ -1,0 +1,35 @@
+{
+  "daily": {
+    "2026-05-10": {
+      "calls": 4,
+      "tokens": 3000,
+      "cost_usd": 0.00028000000000000003,
+      "by_provider": {
+        "groq": {
+          "calls": 2,
+          "tokens": 1000
+        },
+        "deepseek": {
+          "calls": 2,
+          "tokens": 2000
+        }
+      }
+    },
+    "2026-05-11": {
+      "calls": 85,
+      "tokens": 1092535,
+      "cost_usd": 0.1529549,
+      "by_provider": {
+        "deepseek": {
+          "calls": 85,
+          "tokens": 1092535
+        }
+      }
+    }
+  },
+  "totals": {
+    "calls": 89,
+    "tokens": 1095535,
+    "cost_usd": 0.1532349
+  }
+}

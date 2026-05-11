@@ -1,0 +1,23 @@
+{
+  "orden_id": "ORD-001",
+  "emisor": "Meta-Agente Zirseaz",
+  "destinatario": "agente_rrss",
+  "accion": "GENERAR_CONTENIDO",
+  "instrucciones": {
+    "tema": "Servicios de IA y Automatización para empresas (MOAI)",
+    "plataformas": [
+      "Instagram",
+      "LinkedIn"
+    ],
+    "num_posts": 5,
+    "pilares": [
+      "CORE (Operaciones & Data): Agentes IA, Data Warehouses, Automatización",
+      "GROWTH (Ventas & Adquisición): Funnels B2B, Engagement Cognitivo",
+      "MEDIA (Creatividad & Sintético): Pipelines de Media Sintética"
+    ],
+    "urgencia": "ALTA",
+    "formato_salida": "revision_rrss.md"
+  },
+  "fecha_creacion": "2026-05-10",
+  "estado": "PENDIENTE"
+}

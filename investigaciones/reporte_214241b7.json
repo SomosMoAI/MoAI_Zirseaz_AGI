@@ -1,0 +1,135 @@
+{
+  "metadata": {
+    "titulo": "Investigacion: demo_pipeline_auto",
+    "sesion_id": "214241b7",
+    "fecha": "2026-05-11T12:05:53.558797",
+    "fuentes_analizadas": 9,
+    "hallazgos_clave": [],
+    "resumen_ejecutivo": "Investigacion automatizada sobre demo_pipeline_auto",
+    "recomendaciones": [
+      "Revisar fuentes primarias",
+      "Validar informacion con expertos",
+      "Documentar hallazgos"
+    ],
+    "estado": "completado"
+  },
+  "datos_crudos": [
+    {
+      "query": "inteligencia artificial agentes autónomos",
+      "timestamp": "2026-05-11T12:05:53.557921",
+      "resultados_simulados": true,
+      "num_resultados": 5
+    },
+    {
+      "query": "inteligencia artificial agentes autónomos 2025 2026",
+      "timestamp": "2026-05-11T12:05:53.558293",
+      "resultados_simulados": true,
+      "num_resultados": 5
+    },
+    {
+      "query": "inteligencia artificial agentes autónomos avances recientes",
+      "timestamp": "2026-05-11T12:05:53.558316",
+      "resultados_simulados": true,
+      "num_resultados": 5
+    },
+    {
+      "query": "inteligencia artificial agentes autónomos tutorial guia",
+      "timestamp": "2026-05-11T12:05:53.558325",
+      "resultados_simulados": true,
+      "num_resultados": 5
+    },
+    {
+      "query": "inteligencia artificial agentes autónomos herramientas",
+      "timestamp": "2026-05-11T12:05:53.558333",
+      "resultados_simulados": true,
+      "num_resultados": 5
+    },
+    {
+      "query": "inteligencia artificial agentes autónomos vs alternativas",
+      "timestamp": "2026-05-11T12:05:53.558345",
+      "resultados_simulados": true,
+      "num_resultados": 5
+    },
+    {
+      "query": "inteligencia artificial agentes autónomos implementacion",
+      "timestamp": "2026-05-11T12:05:53.558762",
+      "resultados_simulados": true,
+      "num_resultados": 5
+    },
+    {
+      "query": "inteligencia artificial agentes autónomos mejores practicas",
+      "timestamp": "2026-05-11T12:05:53.558777",
+      "resultados_simulados": true,
+      "num_resultados": 5
+    },
+    {
+      "query": "inteligencia artificial agentes autónomos ejemplos codigo",
+      "timestamp": "2026-05-11T12:05:53.558784",
+      "resultados_simulados": true,
+      "num_resultados": 5
+    }
+  ],
+  "queries_ejecutadas": [
+    "inteligencia artificial agentes autónomos",
+    "inteligencia artificial agentes autónomos 2025 2026",
+    "inteligencia artificial agentes autónomos avances recientes",
+    "inteligencia artificial agentes autónomos tutorial guia",
+    "inteligencia artificial agentes autónomos herramientas",
+    "inteligencia artificial agentes autónomos vs alternativas",
+    "inteligencia artificial agentes autónomos implementacion",
+    "inteligencia artificial agentes autónomos mejores practicas",
+    "inteligencia artificial agentes autónomos ejemplos codigo"
+  ],
+  "historial": [
+    {
+      "timestamp": "2026-05-11T12:05:53.557894",
+      "nivel": "INFO",
+      "mensaje": "Plan generado: 9 queries"
+    },
+    {
+      "timestamp": "2026-05-11T12:05:53.557911",
+      "nivel": "INFO",
+      "mensaje": "Buscando: inteligencia artificial agentes autónomos"
+    },
+    {
+      "timestamp": "2026-05-11T12:05:53.557930",
+      "nivel": "INFO",
+      "mensaje": "Buscando: inteligencia artificial agentes autónomos 2025 2026"
+    },
+    {
+      "timestamp": "2026-05-11T12:05:53.558306",
+      "nivel": "INFO",
+      "mensaje": "Buscando: inteligencia artificial agentes autónomos avances recientes"
+    },
+    {
+      "timestamp": "2026-05-11T12:05:53.558320",
+      "nivel": "INFO",
+      "mensaje": "Buscando: inteligencia artificial agentes autónomos tutorial guia"
+    },
+    {
+      "timestamp": "2026-05-11T12:05:53.558329",
+      "nivel": "INFO",
+      "mensaje": "Buscando: inteligencia artificial agentes autónomos herramientas"
+    },
+    {
+      "timestamp": "2026-05-11T12:05:53.558337",
+      "nivel": "INFO",
+      "mensaje": "Buscando: inteligencia artificial agentes autónomos vs alternativas"
+    },
+    {
+      "timestamp": "2026-05-11T12:05:53.558348",
+      "nivel": "INFO",
+      "mensaje": "Buscando: inteligencia artificial agentes autónomos implementacion"
+    },
+    {
+      "timestamp": "2026-05-11T12:05:53.558773",
+      "nivel": "INFO",
+      "mensaje": "Buscando: inteligencia artificial agentes autónomos mejores practicas"
+    },
+    {
+      "timestamp": "2026-05-11T12:05:53.558781",
+      "nivel": "INFO",
+      "mensaje": "Buscando: inteligencia artificial agentes autónomos ejemplos codigo"
+    }
+  ]
+}

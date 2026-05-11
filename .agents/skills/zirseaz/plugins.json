@@ -1,0 +1,142 @@
+{
+    "_meta": {
+        "version": "2.0",
+        "description": "Registro de plugins/skills de Zirseaz v5 Cortex. Auto-actualizado por agent_skills y cargado por el listener.",
+        "last_updated": "2026-05-10"
+    },
+    "plugins": {
+        "memory_manager": {
+            "file": "skills_repo/memory_manager.py",
+            "description": "Memoria semantica categorizada (episodica/semantica/procedural) con busqueda TF-IDF y auto-compresion.",
+            "functions": [
+                "get_core_memory",
+                "add_memory",
+                "search_memory",
+                "get_pending_objectives",
+                "add_objective",
+                "complete_objective",
+                "get_memory_stats"
+            ],
+            "category": "core",
+            "requires_api": false
+        },
+        "agent_forge": {
+            "file": "skills_repo/agent_forge.py",
+            "description": "Forja nuevos sub-agentes con estructura estandar, registro en memoria, y listado.",
+            "functions": [
+                "create_subagent",
+                "list_agents"
+            ],
+            "category": "core",
+            "requires_api": false
+        },
+        "agent_orchestrator": {
+            "file": "skills_repo/agent_orchestrator.py",
+            "description": "Delega tareas a sub-agentes existentes, invocandolos via LLM con su SKILL.md como system prompt.",
+            "functions": [
+                "orchestrate_agent"
+            ],
+            "category": "core",
+            "requires_api": true
+        },
+        "agent_skills": {
+            "file": "skills_repo/agent_skills.py",
+            "description": "Crea habilidades con auto-testing: quarantine -> test -> skills_repo. Skills fallidas quedan en quarantine/.",
+            "functions": [
+                "crear_habilidad",
+                "listar_habilidades_disponibles"
+            ],
+            "category": "core",
+            "requires_api": false
+        },
+        "email_manager": {
+            "file": "skills_repo/email_manager.py",
+            "description": "Envia correos electronicos via Gmail SMTP. Usa env_loader centralizado.",
+            "functions": [
+                "send_email_to"
+            ],
+            "category": "communication",
+            "requires_api": false
+        },
+        "hosting_manager": {
+            "file": "skills_repo/hosting_manager.py",
+            "description": "Despliega archivos al hosting via FTP. Usa env_loader centralizado. Puede listar archivos remotos.",
+            "functions": [
+                "deploy_to_hosting",
+                "list_remote_files"
+            ],
+            "category": "deployment",
+            "requires_api": false
+        },
+        "search_skills": {
+            "file": "skills_repo/search_skills.py",
+            "description": "Busqueda web (DuckDuckGo HTML), lectura de URLs, y busqueda de noticias (NewsAPI).",
+            "functions": [
+                "buscar_en_web",
+                "leer_contenido_url",
+                "buscar_noticias_newsapi"
+            ],
+            "category": "research",
+            "requires_api": false
+        },
+        "web_scraper": {
+            "file": "skills_repo/web_scraper.py",
+            "description": "Extrae texto limpio de cualquier URL publica. Usa parser HTML con tag-stack para anidamiento correcto.",
+            "functions": [
+                "scrape_url"
+            ],
+            "category": "research",
+            "requires_api": false
+        },
+        "utility_skills": {
+            "file": "skills_repo/utility_skills.py",
+            "description": "Utilidades del sistema: gestion de archivos, info del sistema, procesamiento de texto, peticiones HTTP.",
+            "functions": [
+                "leer_archivo",
+                "escribir_archivo",
+                "listar_directorio",
+                "eliminar_archivo",
+                "crear_carpeta",
+                "obtener_info_sistema",
+                "obtener_hora_actual",
+                "tamano_archivo",
+                "buscar_archivos_por_extension",
+                "obtener_ruta_actual",
+                "contar_palabras",
+                "extraer_urls",
+                "reemplazar_texto_en_archivo",
+                "calcular_hash_archivo",
+                "formatear_json",
+                "descargar_archivo",
+                "obtener_ip_publica",
+                "verificar_sitio_web",
+                "enviar_peticion_get",
+                "enviar_peticion_post"
+            ],
+            "category": "system",
+            "requires_api": false
+        },
+        "system_skills": {
+            "file": "skills_repo/system_skills.py",
+            "description": "Ejecucion directa de comandos de terminal (Windows/Linux).",
+            "functions": [
+                "ejecutar_comando"
+            ],
+            "category": "system",
+            "requires_api": false,
+            "security_warning": "Ejecuta comandos shell con shell=True. Usar con precaucion."
+        },
+        "test_skill_temp": {
+            "file": "skills_repo/test_skill_temp.py",
+            "description": "Skill de prueba temporal",
+            "functions": [
+                "add_numbers",
+                "hello_world"
+            ],
+            "category": "custom",
+            "requires_api": false,
+            "auto_generated": true,
+            "created_at": "2026-05-10T21:35:00"
+        }
+    }
+}

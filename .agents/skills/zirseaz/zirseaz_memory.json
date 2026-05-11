@@ -1,0 +1,65 @@
+{
+    "episodic": [
+        {
+            "content": "Se implemento Cortex ReAct",
+            "timestamp": "2026-05-10T21:35:00",
+            "source": "zirseaz_self"
+        },
+        {
+            "content": "Completé el objetivo [1]: [META] crear un pipeline completo de investigacion y despliegue automatizado",
+            "timestamp": "2026-05-11T11:54:38",
+            "source": "zirseaz_self"
+        }
+    ],
+    "semantic": [
+        {
+            "content": "Test de evolucion V5 completado",
+            "timestamp": "2026-05-10T21:35:00",
+            "source": "zirseaz_self"
+        },
+        {
+            "content": "Pipeline completo de investigacion y despliegue automatizado implementado exitosamente. Incluye: busqueda web automatizada, analisis de contenido, generacion de resumenes, despliegue automatico en hosting y notificacion por email.",
+            "timestamp": "2026-05-11T11:54:38",
+            "source": "zirseaz_self"
+        }
+    ],
+    "procedural": [
+        {
+            "content": "Error aprendido [TimeoutError]: TimeoutError: demasiado lento. Codigo que fallo usaba: os",
+            "timestamp": "2026-05-10T21:43:16",
+            "source": "zirseaz_self"
+        },
+        {
+            "content": "Error aprendido [unknown]: Error de ejecucion: name 'email_manager' is not defined\n. Codigo que fallo usaba: smtplib, MIMEText, MIMEMultipart, os",
+            "timestamp": "2026-05-11T10:12:11",
+            "source": "zirseaz_self"
+        },
+        {
+            "content": "Error aprendido [unknown]: Error de ejecucion: cannot import name 'leer_contenido_url' from 'utility_skills' (C:\\Users\\cueva\\On. Codigo que fallo usaba: scrape_url, leer_contenido_url",
+            "timestamp": "2026-05-11T10:19:12",
+            "source": "zirseaz_self"
+        },
+        {
+            "content": "Error aprendido [unknown]: Error de ejecucion: invalid syntax (<string>, line 2)\n. Codigo que fallo usaba: json, obtener_info_sistema, get_core_memory",
+            "timestamp": "2026-05-11T10:50:37",
+            "source": "zirseaz_self"
+        },
+        {
+            "content": "Error aprendido [unknown]: Error de ejecucion: [Errno 2] No such file or directory: 'env_loader.py'\n. Codigo que fallo usaba: sys",
+            "timestamp": "2026-05-11T11:19:39",
+            "source": "zirseaz_self"
+        }
+    ],
+    "archived": [],
+    "core_memories": [
+        "Test de evolucion V5 completado",
+        "Se implemento Cortex ReAct",
+        "Error aprendido [TimeoutError]: TimeoutError: demasiado lento. Codigo que fallo usaba: os",
+        "Error aprendido [unknown]: Error de ejecucion: name 'email_manager' is not defined\n. Codigo que fallo usaba: smtplib, MIMEText, MIMEMultipart, os",
+        "Error aprendido [unknown]: Error de ejecucion: cannot import name 'leer_contenido_url' from 'utility_skills' (C:\\Users\\cueva\\On. Codigo que fallo usaba: scrape_url, leer_contenido_url",
+        "Error aprendido [unknown]: Error de ejecucion: invalid syntax (<string>, line 2)\n. Codigo que fallo usaba: json, obtener_info_sistema, get_core_memory",
+        "Error aprendido [unknown]: Error de ejecucion: [Errno 2] No such file or directory: 'env_loader.py'\n. Codigo que fallo usaba: sys",
+        "Completé el objetivo [1]: [META] crear un pipeline completo de investigacion y despliegue automatizado",
+        "Pipeline completo de investigacion y despliegue automatizado implementado exitosamente. Incluye: busqueda web automatizada, analisis de contenido, generacion de resumenes, despliegue automatico en hosting y notificacion por email."
+    ]
+}

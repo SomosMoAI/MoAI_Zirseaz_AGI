@@ -1,0 +1,64 @@
+{
+  "patterns": [
+    {
+      "error_type": "TimeoutError",
+      "error_snippet": "TimeoutError: demasiado lento",
+      "code_snippet": "import os; os.walk(\"/\")",
+      "imports_used": [
+        "os"
+      ],
+      "timestamp": "2026-05-10T21:43:16",
+      "count": 1
+    },
+    {
+      "error_type": "unknown",
+      "error_snippet": "Error de ejecucion: name 'email_manager' is not defined\n",
+      "code_snippet": "import smtplib\nfrom email.mime.text import MIMEText\nfrom email.mime.multipart import MIMEMultipart\nimport os\n\n# Configuración del correo (usando Gmail SMTP - se requiere contraseña de aplicación)\n# Como no tenemos acceso directo al envío SMTP, usaremos la herramienta email_manager\n\nrap = \"\"\"\n🎤 <b>RA",
+      "imports_used": [
+        "smtplib",
+        "MIMEText",
+        "MIMEMultipart",
+        "os"
+      ],
+      "timestamp": "2026-05-11T10:12:11",
+      "count": 4,
+      "last_seen": "2026-05-11T11:31:26"
+    },
+    {
+      "error_type": "unknown",
+      "error_snippet": "Error de ejecucion: cannot import name 'leer_contenido_url' from 'utility_skills' (C:\\Users\\cueva\\OneDrive\\Escritorio\\Agentes\\.agents\\skills\\zirseaz\\skills_repo\\utility_skills.py)\n",
+      "code_snippet": "# Paso 2b: Scrapear directamente fuentes confiables\nfrom web_scraper import scrape_url\nfrom utility_skills import leer_contenido_url\n\n# Fuentes sobre la ley\nfuentes = [\n    'https://www.diarioconstitucional.cl/2025/01/15/ley-de-proteccion-de-datos-personales-en-chile-claves-para-entender-la-nueva-no",
+      "imports_used": [
+        "scrape_url",
+        "leer_contenido_url"
+      ],
+      "timestamp": "2026-05-11T10:19:12",
+      "count": 3,
+      "last_seen": "2026-05-11T11:22:02"
+    },
+    {
+      "error_type": "unknown",
+      "error_snippet": "Error de ejecucion: invalid syntax (<string>, line 2)\n",
+      "code_snippet": "import json\n%pip install -q requests beautifulsoup4 selenium playwright pdfminer.six openai langchain langchain-community llama-index duckduckgo-search 2>&1 | tail -5\n\n# Obtener informacion del sistema y archivos disponibles\nfrom utility_skills import obtener_info_sistema, listar_directorio, obtener",
+      "imports_used": [
+        "json",
+        "obtener_info_sistema",
+        "get_core_memory"
+      ],
+      "timestamp": "2026-05-11T10:50:37",
+      "count": 2,
+      "last_seen": "2026-05-11T11:03:38"
+    },
+    {
+      "error_type": "unknown",
+      "error_snippet": "Error de ejecucion: [Errno 2] No such file or directory: 'env_loader.py'\n",
+      "code_snippet": "import sys, os\nsys.path.insert(0, os.path.join('.agents', 'skills', 'zirseaz', 'skills_repo'))\n\n# Ver qué funciones tiene env_loader\nwith open('env_loader.py', 'r', encoding='utf-8') as f:\n    content = f.read()\nprint(content[:2000])\nprint(\"...\")\nprint(content[-1500:])",
+      "imports_used": [
+        "sys"
+      ],
+      "timestamp": "2026-05-11T11:19:39",
+      "count": 5,
+      "last_seen": "2026-05-11T12:08:15"
+    }
+  ]
+}

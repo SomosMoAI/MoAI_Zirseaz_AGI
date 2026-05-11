@@ -1,0 +1,225 @@
+{
+  "all_notebooks": [
+    {
+      "id": "f1c1d69c-8054-4d81-b2ba-c41811eaaa87",
+      "title": "Architecture and Agent Implementation Guide",
+      "source_count": 35,
+      "url": "https://notebooklm.google.com/notebook/f1c1d69c-8054-4d81-b2ba-c41811eaaa87",
+      "ownership": "owned",
+      "is_shared": true,
+      "created_at": "2026-04-19T15:40:38Z",
+      "modified_at": "2026-04-19T16:08:51Z"
+    },
+    {
+      "id": "ecbb5190-10a1-456a-8ba6-e629f7c38bbb",
+      "title": "Chilean Automotive Market Outlook 2026: Sales, Trends, and Innovation",
+      "source_count": 10,
+      "url": "https://notebooklm.google.com/notebook/ecbb5190-10a1-456a-8ba6-e629f7c38bbb",
+      "ownership": "owned",
+      "is_shared": false,
+      "created_at": "2026-04-16T20:51:45Z",
+      "modified_at": "2026-04-16T21:20:32Z"
+    },
+    {
+      "id": "94dadfe3-32b6-474a-9d14-ed40a34963e4",
+      "title": "All We Have Is Us: Impact Distribution Strategy",
+      "source_count": 1,
+      "url": "https://notebooklm.google.com/notebook/94dadfe3-32b6-474a-9d14-ed40a34963e4",
+      "ownership": "owned",
+      "is_shared": false,
+      "created_at": "2026-04-09T17:28:40Z",
+      "modified_at": "2026-04-09T17:28:41Z"
+    },
+    {
+      "id": "e9a739ea-8847-4dcf-8589-a1af4361d34f",
+      "title": "",
+      "source_count": 0,
+      "url": "https://notebooklm.google.com/notebook/e9a739ea-8847-4dcf-8589-a1af4361d34f",
+      "ownership": "owned",
+      "is_shared": false,
+      "created_at": "2026-04-08T15:14:53Z",
+      "modified_at": "2026-04-08T15:14:54Z"
+    },
+    {
+      "id": "6f0f3766-1c75-4903-98e8-2ff0155e8181",
+      "title": "Bestia: The 21-Year Harvest",
+      "source_count": 1,
+      "url": "https://notebooklm.google.com/notebook/6f0f3766-1c75-4903-98e8-2ff0155e8181",
+      "ownership": "owned",
+      "is_shared": false,
+      "created_at": "2026-03-20T22:55:11Z",
+      "modified_at": "2026-03-23T18:37:46Z"
+    },
+    {
+      "id": "d1acb9e2-cc88-40e6-9d22-60d378224a5f",
+      "title": "Skills Agentic AI",
+      "source_count": 41,
+      "url": "https://notebooklm.google.com/notebook/d1acb9e2-cc88-40e6-9d22-60d378224a5f",
+      "ownership": "owned",
+      "is_shared": true,
+      "created_at": "2026-03-19T13:17:32Z",
+      "modified_at": "2026-03-19T18:21:33Z"
+    },
+    {
+      "id": "9b7d57de-1a8e-4fad-9de0-6b2ed04d550f",
+      "title": "Tendencias Agenticas 2026",
+      "source_count": 38,
+      "url": "https://notebooklm.google.com/notebook/9b7d57de-1a8e-4fad-9de0-6b2ed04d550f",
+      "ownership": "owned",
+      "is_shared": true,
+      "created_at": "2026-03-19T18:15:46Z",
+      "modified_at": "2026-03-19T18:17:34Z"
+    },
+    {
+      "id": "e937e652-c86c-43b1-bd7d-100a3e7316d3",
+      "title": "Teorías del Fuego y Fundamentos de la Combustión",
+      "source_count": 1,
+      "url": "https://notebooklm.google.com/notebook/e937e652-c86c-43b1-bd7d-100a3e7316d3",
+      "ownership": "shared_with_me",
+      "is_shared": true,
+      "created_at": "2026-03-18T18:38:44Z",
+      "modified_at": "2026-03-19T15:18:11Z"
+    },
+    {
+      "id": "5e80b382-9b26-4c46-a600-01e424d64b35",
+      "title": "AI - AGENTS",
+      "source_count": 28,
+      "url": "https://notebooklm.google.com/notebook/5e80b382-9b26-4c46-a600-01e424d64b35",
+      "ownership": "owned",
+      "is_shared": false,
+      "created_at": "2026-03-17T20:04:06Z",
+      "modified_at": "2026-03-19T15:17:52Z"
+    },
+    {
+      "id": "e522b5d3-eb2b-48b9-849a-e92ccbbac2fc",
+      "title": "Cine para Cuaticos",
+      "source_count": 11,
+      "url": "https://notebooklm.google.com/notebook/e522b5d3-eb2b-48b9-849a-e92ccbbac2fc",
+      "ownership": "shared_with_me",
+      "is_shared": true,
+      "created_at": "2026-01-29T13:38:01Z",
+      "modified_at": "2026-03-19T13:13:44Z"
+    },
+    {
+      "id": "dc649b85-61d9-437b-96e6-6a4bd34978ec",
+      "title": "MO-AI.CL",
+      "source_count": 7,
+      "url": "https://notebooklm.google.com/notebook/dc649b85-61d9-437b-96e6-6a4bd34978ec",
+      "ownership": "shared_with_me",
+      "is_shared": true,
+      "created_at": "2026-01-26T21:40:02Z",
+      "modified_at": "2026-03-03T16:37:44Z"
+    },
+    {
+      "id": "cddbb12f-27bd-49db-af74-510164b89ca4",
+      "title": "Cortos-fuentes",
+      "source_count": 68,
+      "url": "https://notebooklm.google.com/notebook/cddbb12f-27bd-49db-af74-510164b89ca4",
+      "ownership": "owned",
+      "is_shared": false,
+      "created_at": "2026-02-27T13:49:28Z",
+      "modified_at": "2026-02-27T14:20:29Z"
+    },
+    {
+      "id": "7fc9f61d-2607-427d-afaf-daafb9145a9b",
+      "title": "Mastering the Modern Curriculum Vitae: A Comprehensive Guide",
+      "source_count": 7,
+      "url": "https://notebooklm.google.com/notebook/7fc9f61d-2607-427d-afaf-daafb9145a9b",
+      "ownership": "owned",
+      "is_shared": false,
+      "created_at": "2026-02-17T21:07:11Z",
+      "modified_at": "2026-02-17T21:10:11Z"
+    },
+    {
+      "id": "bd423a8a-9ace-4811-981d-8645d0b49cc9",
+      "title": "Antigravity Master",
+      "source_count": 42,
+      "url": "https://notebooklm.google.com/notebook/bd423a8a-9ace-4811-981d-8645d0b49cc9",
+      "ownership": "owned",
+      "is_shared": true,
+      "created_at": "2026-02-14T13:04:12Z",
+      "modified_at": "2026-02-16T13:51:42Z"
+    },
+    {
+      "id": "539fdf1c-b777-479c-acfb-45ed47dfdec6",
+      "title": "",
+      "source_count": 0,
+      "url": "https://notebooklm.google.com/notebook/539fdf1c-b777-479c-acfb-45ed47dfdec6",
+      "ownership": "owned",
+      "is_shared": false,
+      "created_at": "2026-02-15T13:36:38Z",
+      "modified_at": "2026-02-15T16:46:25Z"
+    },
+    {
+      "id": "c46708a8-062c-4352-bdae-86189aaf25fc",
+      "title": "Manual de Psicoeducación para el Trastorno Bipolar",
+      "source_count": 1,
+      "url": "https://notebooklm.google.com/notebook/c46708a8-062c-4352-bdae-86189aaf25fc",
+      "ownership": "shared_with_me",
+      "is_shared": true,
+      "created_at": "2026-02-11T19:12:57Z",
+      "modified_at": "2026-02-12T12:35:54Z"
+    },
+    {
+      "id": "57b9da80-7673-4b7f-9479-1d559a24bb3f",
+      "title": "entro de Entrenamiento Integral de los Trastornos Bipolares",
+      "source_count": 1,
+      "url": "https://notebooklm.google.com/notebook/57b9da80-7673-4b7f-9479-1d559a24bb3f",
+      "ownership": "owned",
+      "is_shared": false,
+      "created_at": "2026-01-10T17:46:18Z",
+      "modified_at": "2026-02-05T19:24:21Z"
+    },
+    {
+      "id": "85e2d2c3-e864-44b4-b74e-2efb46e07ffb",
+      "title": "",
+      "source_count": 0,
+      "url": "https://notebooklm.google.com/notebook/85e2d2c3-e864-44b4-b74e-2efb46e07ffb",
+      "ownership": "owned",
+      "is_shared": false,
+      "created_at": "2026-01-10T17:44:59Z",
+      "modified_at": "2026-01-10T17:45:00Z"
+    },
+    {
+      "id": "c355cf06-5c6f-4a1a-b77b-80c028527f06",
+      "title": "Debate IA: Ética y Algoritmos",
+      "source_count": 1,
+      "url": "https://notebooklm.google.com/notebook/c355cf06-5c6f-4a1a-b77b-80c028527f06",
+      "ownership": "owned",
+      "is_shared": false,
+      "created_at": "2025-01-28T20:03:07Z",
+      "modified_at": "2025-05-13T19:23:52Z"
+    },
+    {
+      "id": "1511e9a1-6138-4472-b8c9-5b1c97befde6",
+      "title": "El Último Juego",
+      "source_count": 1,
+      "url": "https://notebooklm.google.com/notebook/1511e9a1-6138-4472-b8c9-5b1c97befde6",
+      "ownership": "owned",
+      "is_shared": false,
+      "created_at": "2025-04-24T00:41:05Z",
+      "modified_at": "2025-04-26T02:17:58Z"
+    },
+    {
+      "id": "9fd67d66-52c7-4cfc-a1c2-873e38f28827",
+      "title": "Untitled notebook",
+      "source_count": 3,
+      "url": "https://notebooklm.google.com/notebook/9fd67d66-52c7-4cfc-a1c2-873e38f28827",
+      "ownership": "owned",
+      "is_shared": false,
+      "created_at": "2024-11-04T15:32:09Z",
+      "modified_at": "2024-11-04T15:32:10Z"
+    }
+  ],
+  "found_moai": null,
+  "found_cuatico": {
+    "id": "e522b5d3-eb2b-48b9-849a-e92ccbbac2fc",
+    "title": "Cine para Cuaticos",
+    "source_count": 11,
+    "url": "https://notebooklm.google.com/notebook/e522b5d3-eb2b-48b9-849a-e92ccbbac2fc",
+    "ownership": "shared_with_me",
+    "is_shared": true,
+    "created_at": "2026-01-29T13:38:01Z",
+    "modified_at": "2026-03-19T13:13:44Z"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "nombre": "Pipeline Investigacion y Despliegue Automatizado",
+  "version": "1.0.0",
+  "creado": "2026-05-11T11:48:42.724837",
+  "estado": "activo",
+  "fases": [
+    {
+      "id": 1,
+      "nombre": "Investigacion",
+      "descripcion": "Buscar informacion relevante y analizarla",
+      "habilidades_requeridas": [
+        "buscar_en_web",
+        "leer_contenido_url",
+        "scrape_url"
+      ],
+      "accion_base": "investigacion_automatizada"
+    },
+    {
+      "id": 2,
+      "nombre": "Analisis",
+      "descripcion": "Procesar y estructurar la informacion encontrada",
+      "habilidades_requeridas": [
+        "leer_archivo",
+        "contar_palabras",
+        "extraer_urls"
+      ],
+      "accion_base": "analisis_contenido"
+    },
+    {
+      "id": 3,
+      "nombre": "Construccion",
+      "descripcion": "Generar el codigo o solucion basada en la investigacion",
+      "habilidades_requeridas": [
+        "escribir_archivo",
+        "ejecutar_comando"
+      ],
+      "accion_base": "construir_solucion"
+    },
+    {
+      "id": 4,
+      "nombre": "Pruebas",
+      "descripcion": "Validar que la solucion funcione correctamente",
+      "habilidades_requeridas": [
+        "ejecutar_comando",
+        "verificar_sitio_web"
+      ],
+      "accion_base": "ejecutar_pruebas"
+    },
+    {
+      "id": 5,
+      "nombre": "Despliegue",
+      "descripcion": "Publicar o alojar la solucion final",
+      "habilidades_requeridas": [
+        "deploy_to_hosting",
+        "enviar_peticion_post"
+      ],
+      "accion_base": "desplegar_solucion"
+    }
+  ],
+  "hooks": {
+    "post_investigacion": "guardar_resultados_en_memoria",
+    "post_despliegue": "notificar_completado"
+  }
+}
