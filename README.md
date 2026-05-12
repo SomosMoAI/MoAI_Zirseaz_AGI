@@ -1,39 +1,43 @@
-# Proyecto: Automatización de RRSS con Antigravity
+# Zirseaz AGI — La IA Hija de Zirseaz
 
-Bienvenido a tu Agente Inteligente de Redes Sociales, diseñado bajo los estandares de Antigravity (2026).
-Este Agente se compone de dos módulos principales con una validación humana en medio para que **NUNCA** publique nada sin tu revisión (Human-In-The-Loop).
+Bienvenido a la **infraestructura** de la IA Hija de Zirseaz. Este repositorio contiene la **arquitectura** de un Meta-Agente Autónomo diseñado para operar con máxima **eficiencia** y **rentabilidad** en tareas de marketing multicanal y automatización de procesos.
 
-## Estructura del Proyecto
+Este proyecto es un sistema **Plug & Play**. Para interactuar con este agente y desplegar su potencial, necesitas dotarlo de sus propios accesos y canales de comunicación.
 
-```text
-📁 c:\Users\cueva\OneDrive\Escritorio\Agentes\
-│
-├── 📄 AGENTS.md                  <-- Las "reglas de negocio" (Tono y reglas que el Agente debe respetar)
-│
-└── 📁 .agents/
-    └── 📁 skills/
-        ├── 📁 social-content-generator/
-        │   └── 📄 SKILL.md       <-- Módulo 1: Crea la grilla, los textos con SEO y los prompts de imágenes. Guardará todo en un archivo temporal.
-        │
-        └── 📁 social-publisher/
-            ├── 📄 SKILL.md       <-- Módulo 2: Lee el contenido aprobado y orquesta el posteo automatizado.
-            └── 📁 scripts/
-                └── 📄 deploy_post.py  <-- Este script enviará el posteo a tu Webhook de Make.com o conexión externa.
+## 🧠 Arquitectura y Enfoque
+
+Zirseaz AGI está diseñado bajo el pilar de la autonomía controlada (**Human-In-The-Loop**). El agente propone y orquesta, pero el humano mantiene el control final.
+
+### Capacidades Core:
+- **Operaciones & Data**: Automatización de procesos y manejo de información estructurada.
+- **Growth**: Generación de contenido estratégico y adquisición programática.
+- **Media**: Orquestación de copys y prompts para contenido sintético.
+
+## 🚀 Despliegue Rápido (Protocolo Plug & Play)
+
+Para poner a operar a la IA Hija de Zirseaz, sigue este protocolo de configuración:
+
+### 1. Clonar el Repositorio
+```bash
+git clone https://github.com/SomosMoAI/MoAI_Zirseaz_AGI.git
+cd MoAI_Zirseaz_AGI
 ```
 
-## ¿Cómo utilizar este Agente?
+### 2. Blindaje de Credenciales (Archivo .env)
+El sistema requiere un archivo `.env` para operar de manera segura. Este archivo contiene tus secretos y **NUNCA** debe ser subido a repositorios públicos.
 
-Es tan simple como abrir tu chat de agente en Antigravity y decirle:
+1. Crea tu archivo `.env` a partir de la plantilla:
+   ```bash
+   cp .env.example .env
+   ```
+2. Abre el archivo `.env` y completa tus datos:
+   - **Telegram Chatbot**: Para hablar conmigo y recibir notificaciones, necesitas crear un bot en Telegram. Habla con `@BotFather` para obtener tu `TELEGRAM_BOT_TOKEN`. Luego, obtén tu `TELEGRAM_CHAT_ID` hablando con `@userinfobot`.
+   - **Correo Electrónico**: Proporcióname una cuenta de correo (o crea una nueva) y genera una contraseña de aplicación (App Password) para que pueda gestionar envíos.
+   - **APIs y Webhooks**: Configura las URLs de tus webhooks (por ejemplo, en n8n) para las tareas de generación de imágenes y publicación automatizada.
 
-> *"Utilizando tus skills, crea una grilla de 1 post para LinkedIn sobre la nueva tendencia de Machine Learning"*
+## 📡 Modularidad y Skills
 
-El agente utilizará el módulo `social-content-generator`, y terminará creando un archivo `revision_rrss.md`.
+Este agente opera mediante un sistema de **Skills** modulares ubicadas en la carpeta `.agents/skills/`. Puedes activar, modificar o expandir estas capacidades según la necesidad de tu negocio.
 
-## Validación Humana y Despliegue
-
-La política del `social-publisher` prohíbe el auto-despliegue. Una vez que hayas leído el documento, para postear simplemente escríbele en tu chat:
-
-> *"Ya revisé la grilla. Puedes proceder y usar tu skill de distribución para postearlo"*
-
-### NOTA TÉCNICA PARA DESPLIEGUE FINAL (Integración Make.com)
-Si deseas publicarlo literalmente en tus cuentas, abre `.agents/skills/social-publisher/scripts/deploy_post.py` y reemplaza la variable `MAKE_WEBHOOK_URL` por de tu webhook en Make.com que creamos en el proyecto pasado (_fd2a177e-ffc4-4c49-8365-a39b72545fc1_).
+---
+*Desarrollado bajo los estándares de ingeniería de MOAI.*

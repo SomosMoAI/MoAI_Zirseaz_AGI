@@ -1,3 +1,9 @@
 .env
 __pycache__/
 *.log
+scratch/
+notebook_data.json
+grilla_ia_2026_latam.json
+memory.json
+preview_posts.html
+revision_rrss.md
