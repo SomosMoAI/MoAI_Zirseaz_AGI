@@ -28,6 +28,13 @@
             "completed": false,
             "priority": "low",
             "created_at": "2026-05-10T21:49:21"
+        },
+        {
+            "id": 5,
+            "task": "CREAR NIDAS: ecommerce zapatillas en mo-ai.cl/nidas",
+            "completed": false,
+            "priority": "normal",
+            "created_at": "2026-05-11T22:10:43"
         }
     ]
 }

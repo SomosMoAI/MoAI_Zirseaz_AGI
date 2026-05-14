@@ -1,0 +1,10 @@
+{
+  "pipeline": "investigacion_nidas",
+  "timestamp": "2026-05-13T21:48:31.781112",
+  "resultados": {
+    "tendencias_diseno_error": "buscar_en_web() got an unexpected keyword argument 'fuente'",
+    "tendencias_moda_error": "buscar_en_web() got an unexpected keyword argument 'fuente'",
+    "ux_calzado_error": "buscar_en_web() got an unexpected keyword argument 'fuente'",
+    "tendencias_color_error": "buscar_en_web() got an unexpected keyword argument 'fuente'"
+  }
+}

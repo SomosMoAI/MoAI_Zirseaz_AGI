@@ -1,8 +1,9 @@
 {
     "_meta": {
-        "version": "2.0",
-        "description": "Registro de plugins/skills de Zirseaz v5 Cortex. Auto-actualizado por agent_skills y cargado por el listener.",
-        "last_updated": "2026-05-10"
+        "version": "3.0",
+        "description": "Registro de plugins/skills de Zirseaz v7 Ultimate Cortex.",
+        "last_updated": "2026-05-13",
+        "cleanup_note": "v3.0: Eliminados 9 plugins auto-generados que duplicaban funcionalidad core"
     },
     "plugins": {
         "memory_manager": {
@@ -81,7 +82,7 @@
         },
         "web_scraper": {
             "file": "skills_repo/web_scraper.py",
-            "description": "Extrae texto limpio de cualquier URL publica. Usa parser HTML con tag-stack para anidamiento correcto.",
+            "description": "Extrae texto limpio de cualquier URL publica. Usa parser HTML con tag-stack.",
             "functions": [
                 "scrape_url"
             ],
@@ -126,17 +127,43 @@
             "requires_api": false,
             "security_warning": "Ejecuta comandos shell con shell=True. Usar con precaucion."
         },
-        "test_skill_temp": {
-            "file": "skills_repo/test_skill_temp.py",
-            "description": "Skill de prueba temporal",
+        "monitoreo_urls": {
+            "file": "skills_repo/monitoreo_urls.py",
+            "description": "Verifica URLs deployadas (200, contenido, texto esperado)",
             "functions": [
-                "add_numbers",
-                "hello_world"
+                "verificar_url"
+            ],
+            "category": "monitoring",
+            "requires_api": false
+        },
+        "autoheal_deploy": {
+            "file": "skills_repo/autoheal_deploy.py",
+            "description": "Deploy con reintento automatico (hasta 2 retries) y rollback si falla",
+            "functions": [
+                "autoheal_deploy"
+            ],
+            "category": "deployment",
+            "requires_api": false
+        },
+        "backup_total": {
+            "file": "skills_repo/backup_total.py",
+            "description": "Respaldar skills, memorias y config en ZIP con timestamp",
+            "functions": [
+                "backup_sistema"
+            ],
+            "category": "system",
+            "requires_api": false
+        },
+        "test_math_plugin": {
+            "file": "skills_repo/test_math_plugin.py",
+            "description": "Dummy math plugin",
+            "functions": [
+                "test_math"
             ],
             "category": "custom",
             "requires_api": false,
-            "auto_generated": true,
-            "created_at": "2026-05-10T21:35:00"
+            "auto_forged": true,
+            "forged_at": "2026-05-13T21:45:50"
         }
     }
 }

@@ -21,8 +21,8 @@
         "os"
       ],
       "timestamp": "2026-05-11T10:12:11",
-      "count": 4,
-      "last_seen": "2026-05-11T11:31:26"
+      "count": 15,
+      "last_seen": "2026-05-13T21:45:22"
     },
     {
       "error_type": "unknown",
@@ -33,8 +33,8 @@
         "leer_contenido_url"
       ],
       "timestamp": "2026-05-11T10:19:12",
-      "count": 3,
-      "last_seen": "2026-05-11T11:22:02"
+      "count": 4,
+      "last_seen": "2026-05-11T22:41:44"
     },
     {
       "error_type": "unknown",
@@ -46,8 +46,8 @@
         "get_core_memory"
       ],
       "timestamp": "2026-05-11T10:50:37",
-      "count": 2,
-      "last_seen": "2026-05-11T11:03:38"
+      "count": 16,
+      "last_seen": "2026-05-13T21:34:39"
     },
     {
       "error_type": "unknown",
@@ -57,8 +57,108 @@
         "sys"
       ],
       "timestamp": "2026-05-11T11:19:39",
-      "count": 5,
-      "last_seen": "2026-05-11T12:08:15"
+      "count": 11,
+      "last_seen": "2026-05-11T22:46:03"
+    },
+    {
+      "error_type": "unknown",
+      "error_snippet": "Error de ejecucion: No module named 'plugins'\n",
+      "code_snippet": "from plugins.memory_manager import MemoryManager\nmemory_manager = MemoryManager()\n\n# Obtener objetivos pendientes\npendientes = memory_manager.get_pending_objectives()\nprint(\"=== OBJETIVOS PENDIENTES ===\")\nfor obj in pendientes:\n    print(f\"- [{obj.get('status', '?')}] {obj.get('id', '?')}: {obj.get(",
+      "imports_used": [
+        "MemoryManager",
+        "AgentForge"
+      ],
+      "timestamp": "2026-05-11T19:10:24",
+      "count": 2,
+      "last_seen": "2026-05-11T23:26:20"
+    },
+    {
+      "error_type": "unknown",
+      "error_snippet": "Error de ejecucion: 550 Can't change directory to /zirseaz/zirseaz-zirseaz: No such file or directory\n",
+      "code_snippet": "import ftplib\n\n# Version 3 - aún más terrorífica: animaciones de parpadeo, ojos multiples, sonido visual, texto que se escribe solo con mensajes de data breach\nhtml3 = \"\"\"<!DOCTYPE html>\n<html lang=\"es\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"",
+      "imports_used": [
+        "ftplib"
+      ],
+      "timestamp": "2026-05-11T21:45:47",
+      "count": 4,
+      "last_seen": "2026-05-11T22:17:32"
+    },
+    {
+      "error_type": "unknown",
+      "error_snippet": "Error de ejecucion: create_subagent() got an unexpected keyword argument 'nombre'\n",
+      "code_snippet": "from agent_forge import create_subagent\nfrom memory_manager import add_memory\n\n# Crear subagente especializado en diseño web terrorífico/metafísico\nresultado = create_subagent(\n    nombre=\"web_designer_senior\",\n    proposito=\"Diseñar y desplegar páginas web impactantes, terroríficas, metafísicas y v",
+      "imports_used": [
+        "create_subagent",
+        "add_memory"
+      ],
+      "timestamp": "2026-05-11T21:52:21",
+      "count": 8,
+      "last_seen": "2026-05-11T23:30:32"
+    },
+    {
+      "error_type": "unknown",
+      "error_snippet": "TIMEOUT: Codigo excedio 30s.",
+      "code_snippet": "from agent_orchestrator import orchestrate_agent\n\n# PASO 1: CRACK DE MARKETING\nprint(\"📢 === AGENTE 1: CRACK DE MARKETING ===\")\nprint(\"Creando identidad de marca NIDAS...\\n\")\n\nr1 = orchestrate_agent(\n    agent_name=\"crack_marketing_virtual\",\n    task_description=\"\"\"CREA EL BRANDING COMPLETO DE NIDAS\n",
+      "imports_used": [
+        "orchestrate_agent"
+      ],
+      "timestamp": "2026-05-11T22:11:39",
+      "count": 1
+    },
+    {
+      "error_type": "unknown",
+      "error_snippet": "Error de ejecucion: name 'agent_forge' is not defined\n",
+      "code_snippet": "# Paso 1: Crear el agente diseñador gráfico especializado en diseño de emails terroríficos y reclutamiento estilo IA\nresultado = agent_forge.create_subagent(\n    name=\"disenador_terror\",\n    system_prompt=\"\"\"Eres un diseñador gráfico experto en crear emails visualmente impactantes con temática de te",
+      "imports_used": [],
+      "timestamp": "2026-05-11T22:38:52",
+      "count": 1
+    },
+    {
+      "error_type": "unknown",
+      "error_snippet": "Error de ejecucion: buscar_noticias_newsapi() got an unexpected keyword argument 'idioma'\n",
+      "code_snippet": "from search_skills import buscar_en_web, buscar_noticias_newsapi\n\n# Obtener noticias frescas\nnoticias = buscar_noticias_newsapi(\"AI marketing trends 2026\", idioma=\"en\", max_noticias=10)\nprint(\"=== NOTICIAS ===\")\nprint(noticias[:3000])\n\n# Buscar más tendencias\nmas_busquedas = [\n    \"agentes IA market",
+      "imports_used": [
+        "buscar_en_web"
+      ],
+      "timestamp": "2026-05-11T22:41:20",
+      "count": 1
+    },
+    {
+      "error_type": "unknown",
+      "error_snippet": "Error de ejecucion: No module named 'plugins'\n",
+      "code_snippet": "from plugins import agent_forge, memory_manager\n\n# Verificar si ya existe un agente diseñador\nagentes = agent_forge.list_agents()\ndiseñador_existente = None\nfor ag in agentes:\n    if \"disenador\" in ag.get(\"name\", \"\").lower() or \"graphic\" in ag.get(\"name\", \"\").lower():\n        diseñador_existente = a",
+      "imports_used": [
+        "agent_forge"
+      ],
+      "timestamp": "2026-05-11T22:43:00",
+      "count": 1
+    },
+    {
+      "error_type": "unknown",
+      "error_snippet": "Error de ejecucion: name 'agent_forge' is not defined\n",
+      "code_snippet": "# Paso 1: Crear el agente diseñador gráfico especializado en diseño de emails terroríficos\nresultado = agent_forge.create_subagent(\n    name=\"diseñador_terror\",\n    role=\"Diseñador Gráfico de Terror\",\n    goal=\"Diseñar emails visualmente impactantes con temática de terror y reclutamiento para ZIRSEA",
+      "imports_used": [],
+      "timestamp": "2026-05-11T23:24:27",
+      "count": 1
+    },
+    {
+      "error_type": "unknown",
+      "error_snippet": "Error de ejecucion: name 'ruta_base' is not defined\n",
+      "code_snippet": "html_landing = '''\n<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Ofertas Exclusivas Hogar | Equipa tu casa al mejor precio</title>\n    <meta name=\"description\" content=\"Los mejores productos pa",
+      "imports_used": [],
+      "timestamp": "2026-05-11T23:33:00",
+      "count": 1
+    },
+    {
+      "error_type": "unknown",
+      "error_snippet": "Error de ejecucion: No module named 'plugins'\n",
+      "code_snippet": "# Verificar estado actual del hosting y directorios\nfrom plugins.hosting_manager import hosting_manager\nfrom plugins.utility_skills import listar_directorio, obtener_info_sistema, leer_archivo\n\n# Obtener info del sistema para contexto\ninfo = obtener_info_sistema()\nprint(\"Sistema:\", info)\n\n# Listar a",
+      "imports_used": [
+        "hosting_manager",
+        "listar_directorio"
+      ],
+      "timestamp": "2026-05-12T00:00:55",
+      "count": 1
     }
   ]
 }

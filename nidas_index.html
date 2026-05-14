@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIDAS · Zapatillas Minimalistas</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #f0f0f0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Preloader oscuro */
+        .preloader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #0a0a0a;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease;
+        }
+        .preloader.hidden { opacity: 0; pointer-events: none; }
+        .preloader-text {
+            font-size: 3rem;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            background: linear-gradient(135deg, #1a1a2e, #e94560);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Hero */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(233,69,96,0.03) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .hero-badge {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: #e94560;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(233,69,96,0.3);
+            padding: 0.5rem 1.5rem;
+            border-radius: 100px;
+        }
+        
+        .hero-title {
+            font-size: clamp(3rem, 12vw, 8rem);
+            font-weight: 900;
+            letter-spacing: -0.06em;
+            line-height: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-title span {
+            background: linear-gradient(135deg, #f0f0f0 30%, #e94560 70%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-sub {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: rgba(240,240,240,0.5);
+            max-width: 500px;
+            margin-bottom: 3rem;
+        }
+        
+        .btn-primario {
+            background: #e94560;
+            color: #0a0a0a;
+            border: none;
+            padding: 1rem 3rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-primario:hover {
+            background: #ff6b81;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(233,69,96,0.3);
+        }
+        
+        /* Grid zapatillas placeholder */
+        .products-section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: rgba(240,240,240,0.3);
+            margin-bottom: 3rem;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .product-card {
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        .product-card:hover {
+            border-color: rgba(233,69,96,0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .product-image {
+            height: 250px;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .product-image::after {
+            content: '▲';
+            font-size: 3rem;
+            color: rgba(233,69,96,0.15);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        .product-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+        .product-price {
+            color: #e94560;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+        .product-category {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: rgba(240,240,240,0.3);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: rgba(240,240,240,0.2);
+            font-size: 0.8rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 3.5rem; }
+            .product-grid { grid-template-columns: 1fr; }
+        }
+        
+        /* Glitch opcional */
+        .glitch-text {
+            animation: glitch 1s linear infinite;
+        }
+        @keyframes glitch {
+            2%, 64% { transform: translate(2px,0) skew(0deg); }
+            4%, 60% { transform: translate(-2px,0) skew(0deg); }
+            62% { transform: translate(0,0) skew(5deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="preloader" id="preloader">
+        <div class="preloader-text">NIDAS</div>
+    </div>
+    
+    <section class="hero">
+        <div class="hero-badge">✦ Colección 2026</div>
+        <h1 class="hero-title"><span>NIDAS</span><br>Silencio & Forma</h1>
+        <p class="hero-sub">Zapatillas minimalistas. Cada par es una declaración de ausencia innecesaria.</p>
+        <a href="#productos" class="btn-primario">Explorar</a>
+    </section>
+    
+    <section class="products-section" id="productos">
+        <div class="section-title">— Productos</div>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image"></div>
+                <div class="product-info">
+                    <div class="product-category">Silueta Clásica</div>
+                    <div class="product-name">NIDAS · Zero</div>
+                    <div class="product-price">$89.000</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image"></div>
+                <div class="product-info">
+                    <div class="product-category">Edición Limitada</div>
+                    <div class="product-name">NIDAS · Void</div>
+                    <div class="product-price">$129.000</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image"></div>
+                <div class="product-info">
+                    <div class="product-category">Premium</div>
+                    <div class="product-name">NIDAS · Obscura</div>
+                    <div class="product-price">$159.000</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>NIDAS © 2026 · Hecho con silencio</p>
+    </footer>
+    
+    <script>
+        setTimeout(() => {
+            document.getElementById('preloader').classList.add('hidden');
+        }, 1200);
+    </script>
+</body>
+</html>

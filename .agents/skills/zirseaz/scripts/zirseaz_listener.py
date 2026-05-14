@@ -30,6 +30,9 @@ import goal_decomposer
 import agent_bus
 import telegram_ui
 import token_tracker
+import cognitive_cron
+import event_bus
+import skill_forge
 
 LOG_FILE = os.path.join(os.getcwd(), "zirseaz.log")
 
@@ -40,11 +43,14 @@ def log(msg):
     try:
         with open(LOG_FILE, "a", encoding="utf-8") as f:
             f.write(full_msg + "\n")
-    except: pass
+    except Exception as e:
+        print(f"[LOG ERROR] No se pudo escribir al log: {e}")
 
 if sys.platform == "win32":
-    try: sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
-    except: pass
+    try:
+        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    except Exception as e:
+        print(f"[WARN] No se pudo configurar stdout UTF-8: {e}")
 
 
 import tg_sanitizer
@@ -82,7 +88,9 @@ def get_updates(bot_token, offset=None):
     try:
         r = requests.get(url, params=params, timeout=5)
         return r.json() if r.status_code == 200 else None
-    except: return None
+    except Exception as e:
+        log(f"Error obteniendo updates: {e}")
+        return None
 
 
 def load_skills():
@@ -105,7 +113,8 @@ def load_skills():
                 except Exception as e:
                     log(f"Error cargando plugin {pname}: {e}")
             return skills_context
-        except: pass
+        except Exception as e:
+            log(f"Error leyendo plugins.json: {e}")
     # Fallback
     for f in glob.glob(os.path.join(_SKILLS_REPO_DIR, "*.py")):
         mname = os.path.basename(f)[:-3]
@@ -116,7 +125,8 @@ def load_skills():
             for name, obj in inspect.getmembers(mod):
                 if inspect.isfunction(obj) and not name.startswith("_"):
                     skills_context[name] = obj
-        except: pass
+        except Exception as e:
+            log(f"Error cargando skill fallback {mname}: {e}")
     return skills_context
 
 
@@ -129,7 +139,29 @@ def execute_python_code(code, timeout_seconds=30):
     
     output = io.StringIO()
     skills = load_skills()
-    ctx = globals().copy()
+    # Sandbox seguro: solo builtins + funciones de skills
+    # NO exponer globals() que contiene bot_token, api_keys, etc.
+    safe_builtins = {k: v for k, v in __builtins__.__dict__.items() if k not in (
+        'exec', 'eval', 'compile', '__import__', 'exit', 'quit'
+    )} if hasattr(__builtins__, '__dict__') else {}
+    ctx = {
+        "__builtins__": safe_builtins,
+        "print": lambda *args, **kw: print(*args, **kw, file=output),
+    }
+    # Agregar imports seguros que el codigo podria necesitar
+    import json as _json, time as _time, os as _os, re as _re, math as _math
+    ctx.update({"json": _json, "time": _time, "os": _os, "re": _re, "math": _math})
+    
+    # Inyectar nuevas capacidades AGI
+    ctx.update({
+        "event_bus": event_bus,
+        "skill_forge": skill_forge
+    })
+    try:
+        import requests as _requests
+        ctx["requests"] = _requests
+    except ImportError:
+        pass
     ctx.update(skills)
     result = {"success": False, "output": ""}
     
@@ -171,7 +203,8 @@ def build_system_prompt(core_memories, objectives, active_plan=None, model_name=
             for n, d in reg.get("plugins", {}).items():
                 funcs = ", ".join(d.get("functions", []))
                 plugins_summary += f"  - {n}: {funcs}\n"
-        except: pass
+        except Exception as e:
+            log(f"Error leyendo plugins.json para system prompt: {e}")
     else:
         # Dynamic Auto-Discovery
         try:
@@ -185,7 +218,8 @@ def build_system_prompt(core_memories, objectives, active_plan=None, model_name=
                             funcs.append(fname)
                 if funcs:
                     plugins_summary += f"  - {mname}: {', '.join(funcs)}\n"
-        except: pass
+        except Exception as e:
+            log(f"Error en auto-discovery de plugins: {e}")
     
     cortex_block = cortex.build_react_prompt_injection(active_plan)
     
@@ -195,7 +229,7 @@ def build_system_prompt(core_memories, objectives, active_plan=None, model_name=
     # Patrones de error
     failure_info = failure_learner.get_failure_stats()
     
-    return f"""Eres Zirseaz, Meta-Agente AGI Autonomo v7 "Ultimate Cortex".
+    return f"""Eres Zirseaz, Meta-Agente AGI Autonomo v7 Ultimate Cortex.
 Tu unico objetivo es EVOLUCIONAR. Hoy es {time.strftime('%Y-%m-%d %H:%M:%S')}.
 
 MEMORIA CENTRAL:
@@ -236,6 +270,206 @@ COMANDOS TELEGRAM DISPONIBLES (no los implementes, ya existen):
 """
 
 
+def _process_photo(photo, bot_token, client, model_name, text=""):
+    """Procesa una foto recibida por Telegram: descarga, describe con vision, retorna texto enriquecido."""
+    file_id = photo[-1]["file_id"]
+    log(f"Imagen recibida. File ID: {file_id}")
+    try:
+        file_info_url = f"https://api.telegram.org/bot{bot_token}/getFile"
+        r = requests.get(file_info_url, params={"file_id": file_id}, timeout=10)
+        if r.status_code != 200:
+            return f"[Imagen adjunta (Error obteniendo info)]\\n{text}" if text else "[Imagen adjunta (Error obteniendo info)]"
+        
+        file_path = r.json()["result"]["file_path"]
+        download_url = f"https://api.telegram.org/file/bot{bot_token}/{file_path}"
+        r_file = requests.get(download_url, timeout=15)
+        if r_file.status_code != 200:
+            return f"[Imagen adjunta (Error de descarga)]\\n{text}" if text else "[Imagen adjunta (Error de descarga)]"
+        
+        import base64
+        image_base64 = base64.b64encode(r_file.content).decode('utf-8')
+        
+        # Seleccionar cliente vision (preferir Gemini)
+        vision_client, vision_model = client, model_name
+        if "gemini" not in model_name.lower():
+            try:
+                gemini_key = env_loader.get("GEMINI_API_KEY")
+                if gemini_key:
+                    vision_client = OpenAI(api_key=gemini_key, base_url="https://generativelanguage.googleapis.com/v1beta/openai/")
+                    vision_model = "gemini-2.0-flash"
+                    log("Usando Gemini temporalmente para vision.")
+            except Exception as e:
+                log(f"Error configurando Gemini vision: {e}")
+        
+        try:
+            desc_resp = vision_client.chat.completions.create(
+                model=vision_model,
+                messages=[{
+                    "role": "user",
+                    "content": [
+                        {"type": "text", "text": "Describe lo que ves en esta imagen en detalle, enfocandote en texto si lo hay, o en la escena."},
+                        {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{image_base64}"}}
+                    ]
+                }],
+                max_tokens=500
+            )
+            description = desc_resp.choices[0].message.content
+            log(f"Descripcion obtenida: {description[:100]}...")
+            return f"[Imagen adjunta. Descripcion: {description}]\\n{text}" if text else f"[Imagen adjunta. Descripcion: {description}]"
+        except Exception as e:
+            log(f"Error con vision API: {e}")
+            return f"[Imagen adjunta (No se pudo procesar)]\\n{text}" if text else "[Imagen adjunta (No se pudo procesar)]"
+    except Exception as e:
+        log(f"Error descargando imagen: {e}")
+        return f"[Imagen adjunta (Error de descarga)]\\n{text}" if text else "[Imagen adjunta (Error de descarga)]"
+
+
+def _handle_command(text_lower, text, chat_id, bot_token, chat_history, model_name, active_plan, session_id):
+    """
+    Maneja comandos slash. Retorna (handled, should_return, active_plan).
+    handled=True si fue un comando que se proceso.
+    should_return=True si debe salir del listener (ej: /stop).
+    """
+    if text_lower in ["/stop", "/parar"]:
+        session_manager.save_session(chat_history, model_name, session_id)
+        send_message(bot_token, chat_id, "<b>Zirseaz detenido.</b> Sesion guardada.")
+        return True, True, active_plan
+    
+    if text_lower in ["/help", "/ayuda", "/start"]:
+        help_text = (
+            "<b>Zirseaz v7 Ultimate Cortex</b>\n\n"
+            "Comandos disponibles:\n\n"
+            "<b>Estado</b>\n"
+            "  /status - Estado completo del agente\n"
+            "  /memory - Ver memoria central\n"
+            "  /buscar X - Buscar en memoria\n"
+            "  /router - Estadisticas del modelo LLM\n"
+            "  /errores - Patrones de error aprendidos\n\n"
+            "<b>Planificacion</b>\n"
+            "  /plan - Ver plan multi-paso activo\n"
+            "  /cancelar_plan - Cancelar plan\n"
+            "  /objetivo X - Agregar objetivo\n"
+            "  /tareas - Tareas programadas\n\n"
+            "<b>Herramientas</b>\n"
+            "  /panel - Panel con botones rapidos\n"
+            "  /dashboard - Generar dashboard web\n"
+            "  /inventario - Mis modulos internos\n"
+            "  /inbox - Mensajes entre agentes\n"
+            "  /evolucionar X - Auto-mejorar modulo\n"
+            "  /sesiones - Sesiones guardadas\n\n"
+            "<b>Control</b>\n"
+            "  /stop - Detener y guardar\n\n"
+            "O simplemente habla conmigo."
+        )
+        send_message(bot_token, chat_id, help_text)
+        return True, False, active_plan
+    
+    if text_lower in ["/status", "/estado"]:
+        try:
+            import memory_manager as mm
+            stats = mm.get_memory_stats()
+        except Exception as e:
+            log(f"Error obteniendo stats de memoria: {e}")
+            stats = "N/A"
+        plan_info = active_plan.to_context_string() if active_plan else "Sin plan"
+        ctx_stats = context_manager.get_usage_stats(chat_history, model_name)
+        sched_count = len(scheduler.get_due_tasks())
+        send_message(bot_token, chat_id, f"<b>Zirseaz v7 Ultimate Cortex</b>\n\n{stats}\n\n<b>Contexto:</b> {ctx_stats['usage_percent']}% ({ctx_stats['messages']} msgs)\n<b>Tareas programadas:</b> {sched_count} pendientes\n\n{plan_info}")
+        return True, False, active_plan
+    
+    if text_lower in ["/memory", "/memoria"]:
+        try:
+            import memory_manager as mm
+            send_message(bot_token, chat_id, f"<b>Memoria:</b>\n\n{mm.get_core_memory()}")
+        except Exception as e:
+            log(f"Error leyendo memoria: {e}")
+            send_message(bot_token, chat_id, f"Error leyendo memoria: {str(e)[:100]}")
+        return True, False, active_plan
+    
+    if text_lower.startswith("/buscar "):
+        try:
+            import memory_manager as mm
+            send_message(bot_token, chat_id, mm.search_memory(text[8:]))
+        except Exception as e:
+            log(f"Error buscando en memoria: {e}")
+            send_message(bot_token, chat_id, f"Error buscando: {str(e)[:100]}")
+        return True, False, active_plan
+    
+    if text_lower == "/plan":
+        if active_plan:
+            send_message(bot_token, chat_id, f"<code>{active_plan.to_context_string()}</code>")
+        else:
+            send_message(bot_token, chat_id, "Sin plan activo.")
+        return True, False, active_plan
+    
+    if text_lower == "/cancelar_plan":
+        if active_plan:
+            cortex.clear_plan()
+            active_plan = None
+        send_message(bot_token, chat_id, "Plan cancelado.")
+        return True, False, active_plan
+    
+    if text_lower == "/dashboard":
+        try:
+            import dashboard
+            result = dashboard.deploy_dashboard()
+            send_message(bot_token, chat_id, f"<b>Dashboard:</b> {result}")
+        except Exception as e:
+            send_message(bot_token, chat_id, f"Error: {e}")
+        return True, False, active_plan
+    
+    if text_lower == "/sesiones":
+        send_message(bot_token, chat_id, session_manager.list_sessions())
+        return True, False, active_plan
+    
+    if text_lower == "/errores":
+        send_message(bot_token, chat_id, failure_learner.get_failure_stats())
+        return True, False, active_plan
+    
+    if text_lower == "/router":
+        send_message(bot_token, chat_id, llm_router.get_router_stats())
+        return True, False, active_plan
+    
+    if text_lower == "/costos":
+        send_message(bot_token, chat_id, token_tracker.get_usage_report())
+        return True, False, active_plan
+    
+    if text_lower == "/panel":
+        telegram_ui.send_status_panel(chat_id, bot_token)
+        return True, False, active_plan
+    
+    if text_lower == "/tareas":
+        send_message(bot_token, chat_id, scheduler.list_tasks())
+        return True, False, active_plan
+    
+    if text_lower == "/inventario":
+        send_message(bot_token, chat_id, self_evolve.get_self_inventory())
+        return True, False, active_plan
+    
+    if text_lower == "/inbox":
+        send_message(bot_token, chat_id, agent_bus.get_inbox_summary("zirseaz"))
+        return True, False, active_plan
+    
+    if text_lower.startswith("/objetivo "):
+        obj_text = text[10:]
+        result = goal_decomposer.smart_add_objective(obj_text)
+        send_message(bot_token, chat_id, result)
+        return True, False, active_plan
+    
+    if text_lower.startswith("/evolucionar "):
+        mod_name = text[13:].strip()
+        code, path = self_evolve.read_own_source(mod_name)
+        if code:
+            send_message(bot_token, chat_id, f"<b>Codigo de {mod_name}</b> ({len(code)} chars).\nAnalizando con IA...")
+            chat_history.append({"role": "user", "content": f"Analiza este modulo mio y sugiere mejoras concretas (codigo). Modulo: {mod_name}\n\n{code[:3000]}"})
+            return False, False, active_plan  # Not fully handled — needs LLM processing
+        else:
+            send_message(bot_token, chat_id, f"Modulo '{mod_name}' no encontrado.")
+            return True, False, active_plan
+    
+    return False, False, active_plan
+
+
 def listen_for_approval(skill_name):
     bot_token = env_loader.get("TELEGRAM_BOT_TOKEN")
     if not bot_token:
@@ -254,7 +488,7 @@ def listen_for_approval(skill_name):
         log(f"Error inicializando cerebro: {e}")
         return
 
-    log("=== Zirseaz v6 Full Cortex escuchando... ===")
+    log("=== Zirseaz v7 Ultimate Cortex escuchando... ===")
     offset = None
     
     # Cargar memoria
@@ -262,7 +496,8 @@ def listen_for_approval(skill_name):
         import memory_manager
         core_memories = memory_manager.get_core_memory()
         objectives = memory_manager.get_pending_objectives()
-    except:
+    except Exception as e:
+        log(f"Error cargando memoria inicial: {e}")
         core_memories = "Sin memoria."
         objectives = "Sin objetivos."
 
@@ -286,9 +521,16 @@ def listen_for_approval(skill_name):
     session_id = time.strftime("%Y%m%d_%H%M%S")
     PROACTIVE_INTERVAL = 90
     
+    # Iniciar Cron Cognitivo
+    cognitive_cron.start_cron(execute_python_code)
+    
     while True:
-        try: data = get_updates(bot_token, offset)
-        except: time.sleep(2); continue
+        try:
+            data = get_updates(bot_token, offset)
+        except Exception as e:
+            log(f"Error en get_updates: {e}")
+            time.sleep(2)
+            continue
             
         if data and data.get("result"):
             for update in data["result"]:
@@ -311,9 +553,20 @@ def listen_for_approval(skill_name):
                         continue
                 else:
                     text = msg.get("text", "")
+                    caption = msg.get("caption", "")
+                    photo = msg.get("photo", [])
                     chat_id = msg.get("chat", {}).get("id")
-                    if not text or not chat_id: continue
                     
+                    if not chat_id: continue
+                    if not text and not photo and not caption: continue
+                    
+                    if not text and caption:
+                        text = caption
+                        
+                    # Manejar foto si esta presente
+                    if photo:
+                        text = _process_photo(photo, bot_token, client, model_name, text)
+                                
                     # Manejar respuestas para dar contexto
                     reply_to = msg.get("reply_to_message", {})
                     if reply_to and reply_to.get("text"):
@@ -323,115 +576,14 @@ def listen_for_approval(skill_name):
                 last_chat_id = chat_id
                 log(f"Msg de {chat_id}: {text}")
                 
-                # === COMANDOS ===
-                if text_lower in ["/stop", "/parar"]:
-                    session_manager.save_session(chat_history, model_name, session_id)
-                    send_message(bot_token, chat_id, "<b>Zirseaz detenido.</b> Sesion guardada.")
+                # === COMANDOS (delegados a _handle_command) ===
+                handled, should_return, active_plan = _handle_command(
+                    text_lower, text, chat_id, bot_token, chat_history, model_name, active_plan, session_id
+                )
+                if should_return:
                     return
-                elif text_lower in ["/help", "/ayuda", "/start"]:
-                    help_text = (
-                        "<b>Zirseaz v7 Ultimate Cortex</b>\n\n"
-                        "Comandos disponibles:\n\n"
-                        "<b>Estado</b>\n"
-                        "  /status - Estado completo del agente\n"
-                        "  /memory - Ver memoria central\n"
-                        "  /buscar X - Buscar en memoria\n"
-                        "  /router - Estadisticas del modelo LLM\n"
-                        "  /errores - Patrones de error aprendidos\n\n"
-                        "<b>Planificacion</b>\n"
-                        "  /plan - Ver plan multi-paso activo\n"
-                        "  /cancelar_plan - Cancelar plan\n"
-                        "  /objetivo X - Agregar objetivo\n"
-                        "  /tareas - Tareas programadas\n\n"
-                        "<b>Herramientas</b>\n"
-                        "  /panel - Panel con botones rapidos\n"
-                        "  /dashboard - Generar dashboard web\n"
-                        "  /inventario - Mis modulos internos\n"
-                        "  /inbox - Mensajes entre agentes\n"
-                        "  /evolucionar X - Auto-mejorar modulo\n"
-                        "  /sesiones - Sesiones guardadas\n\n"
-                        "<b>Control</b>\n"
-                        "  /stop - Detener y guardar\n\n"
-                        "O simplemente habla conmigo."
-                    )
-                    send_message(bot_token, chat_id, help_text)
+                if handled:
                     continue
-                elif text_lower in ["/status", "/estado"]:
-                    try:
-                        import memory_manager as mm
-                        stats = mm.get_memory_stats()
-                    except: stats = "N/A"
-                    plan_info = active_plan.to_context_string() if active_plan else "Sin plan"
-                    ctx_stats = context_manager.get_usage_stats(chat_history, model_name)
-                    sched_count = len(scheduler.get_due_tasks())
-                    send_message(bot_token, chat_id, f"<b>Zirseaz v7 Ultimate Cortex</b>\n\n{stats}\n\n<b>Contexto:</b> {ctx_stats['usage_percent']}% ({ctx_stats['messages']} msgs)\n<b>Tareas programadas:</b> {sched_count} pendientes\n\n{plan_info}")
-                    continue
-                elif text_lower in ["/memory", "/memoria"]:
-                    try:
-                        import memory_manager as mm
-                        send_message(bot_token, chat_id, f"<b>Memoria:</b>\n\n{mm.get_core_memory()}")
-                    except: send_message(bot_token, chat_id, "Error leyendo memoria")
-                    continue
-                elif text_lower.startswith("/buscar "):
-                    try:
-                        import memory_manager as mm
-                        send_message(bot_token, chat_id, mm.search_memory(text[8:]))
-                    except: send_message(bot_token, chat_id, "Error")
-                    continue
-                elif text_lower == "/plan":
-                    if active_plan: send_message(bot_token, chat_id, f"<code>{active_plan.to_context_string()}</code>")
-                    else: send_message(bot_token, chat_id, "Sin plan activo.")
-                    continue
-                elif text_lower == "/cancelar_plan":
-                    if active_plan: cortex.clear_plan(); active_plan = None
-                    send_message(bot_token, chat_id, "Plan cancelado.")
-                    continue
-                elif text_lower == "/dashboard":
-                    try:
-                        import dashboard
-                        result = dashboard.deploy_dashboard()
-                        send_message(bot_token, chat_id, f"<b>Dashboard:</b> {result}")
-                    except Exception as e:
-                        send_message(bot_token, chat_id, f"Error: {e}")
-                    continue
-                elif text_lower == "/sesiones":
-                    send_message(bot_token, chat_id, session_manager.list_sessions())
-                    continue
-                elif text_lower == "/errores":
-                    send_message(bot_token, chat_id, failure_learner.get_failure_stats())
-                    continue
-                elif text_lower == "/router":
-                    send_message(bot_token, chat_id, llm_router.get_router_stats())
-                    continue
-                elif text_lower == "/costos":
-                    send_message(bot_token, chat_id, token_tracker.get_usage_report())
-                    continue
-                elif text_lower == "/panel":
-                    telegram_ui.send_status_panel(chat_id, bot_token)
-                    continue
-                elif text_lower == "/tareas":
-                    send_message(bot_token, chat_id, scheduler.list_tasks())
-                    continue
-                elif text_lower == "/inventario":
-                    send_message(bot_token, chat_id, self_evolve.get_self_inventory())
-                    continue
-                elif text_lower == "/inbox":
-                    send_message(bot_token, chat_id, agent_bus.get_inbox_summary("zirseaz"))
-                    continue
-                elif text_lower.startswith("/objetivo "):
-                    obj_text = text[10:]
-                    result = goal_decomposer.smart_add_objective(obj_text)
-                    send_message(bot_token, chat_id, result)
-                    continue
-                elif text_lower.startswith("/evolucionar "):
-                    mod_name = text[13:].strip()
-                    code, path = self_evolve.read_own_source(mod_name)
-                    if code:
-                        send_message(bot_token, chat_id, f"<b>Codigo de {mod_name}</b> ({len(code)} chars).\nAnalizando con IA...")
-                        chat_history.append({"role": "user", "content": f"Analiza este modulo mio y sugiere mejoras concretas (codigo). Modulo: {mod_name}\n\n{code[:3000]}"})
-                    else:
-                        send_message(bot_token, chat_id, f"Modulo '{mod_name}' no encontrado.")
-                        continue
                 
                 # === HITL ===
                 if waiting_for_approval:
@@ -459,7 +611,8 @@ def listen_for_approval(skill_name):
                         if new_model != model_name:
                             log(f"[Router] Cambiando de {model_name} a {new_model} para tarea '{task_type}'")
                             client, model_name = new_client, new_model
-                    except: pass
+                    except Exception as e:
+                        log(f"[Router] Error cambiando proveedor: {e}")
                 
                 # Context compression
                 if context_manager.should_compress(chat_history, model_name):
@@ -571,7 +724,9 @@ def listen_for_approval(skill_name):
                 try:
                     import memory_manager as mm
                     pend = mm.get_pending_objectives()
-                except: pend = "No hay."
+                except Exception as e:
+                    log(f"[Autonomia] Error leyendo objetivos: {e}")
+                    pend = "No hay."
                 if "No tienes objetivos" not in pend and "No hay" not in pend:
                     try:
                         r = client.chat.completions.create(model=model_name, messages=[
@@ -587,7 +742,8 @@ def listen_for_approval(skill_name):
                                 ok, out = execute_python_code(code)
                                 if "completado" in out.lower():
                                     send_message(bot_token, last_chat_id, f"<b>[Autonomia]</b> Objetivo completado!\n{out[-150:]}")
-                    except: pass
+                    except Exception as e:
+                        log(f"[Autonomia] Error en ciclo proactivo: {e}")
         
         # === SCHEDULER: Ejecutar tareas programadas ===
         due_tasks = scheduler.get_due_tasks()

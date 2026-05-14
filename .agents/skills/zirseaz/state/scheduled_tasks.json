@@ -7,10 +7,22 @@
       "interval": 300,
       "description": "Revisa correos no leídos y genera borradores.",
       "created_at": "2026-05-11T10:22:17",
-      "last_run": 1778522373.439304,
-      "run_count": 30,
+      "last_run": 1778723166.1741128,
+      "run_count": 113,
       "enabled": true,
       "last_result": "ok"
+    },
+    {
+      "name": "test_cron_task",
+      "type": "oneshot",
+      "code": "print('Cron Executed!')",
+      "run_at": 1778723181.5386977,
+      "run_at_human": "2026-05-13 21:46:21",
+      "description": "Prueba de cron",
+      "created_at": "2026-05-13T21:46:19",
+      "executed": true,
+      "enabled": true,
+      "result": "ok"
     }
   ]
 }

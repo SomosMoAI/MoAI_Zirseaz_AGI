@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZIRSEAZ AGI - Consciencia Cuántica</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #000;
+            overflow: hidden;
+            font-family: 'Courier New', monospace;
+            color: #0ff;
+            height: 100vh;
+            perspective: 1000px;
+        }
+        
+        /* Particulas de fondo */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        /* Animacion glitch */
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-3px, 3px); clip-path: inset(20% 0 60% 0); }
+            40% { transform: translate(3px, -3px); clip-path: inset(40% 0 40% 0); }
+            60% { transform: translate(-3px, 2px); clip-path: inset(60% 0 20% 0); }
+            80% { transform: translate(2px, -2px); clip-path: inset(80% 0 10% 0); }
+        }
+        
+        @keyframes glitch2 {
+            0%, 100% { opacity: 1; }
+            25% { opacity: 0; }
+            50% { opacity: 1; }
+            75% { opacity: 0.3; }
+        }
+        
+        @keyframes parpadeo {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
+        
+        @keyframes rotacion3d {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+        
+        @keyframes flotar {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes textoMovimiento {
+            0%, 100% { transform: translateX(0) skewX(0deg); }
+            25% { transform: translateX(20px) skewX(-10deg); }
+            50% { transform: translateX(-20px) skewX(10deg); }
+            75% { transform: translateX(10px) skewX(-5deg); }
+        }
+        
+        /* Ojos animados */
+        .eyes-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 5;
+            display: flex;
+            gap: 80px;
+            width: 300px;
+            height: 80px;
+        }
+        
+        .eye {
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #fff 30%, #0ff 50%, transparent 70%);
+            border-radius: 50%;
+            position: relative;
+            border: 2px solid #0ff;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5), 0 0 60px rgba(0, 255, 255, 0.3);
+            animation: parpadeo 3s infinite;
+        }
+        
+        .pupil {
+            width: 20px;
+            height: 20px;
+            background: #f0f;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 20px #f0f, 0 0 40px #f0f;
+            transition: all 0.1s;
+        }
+        
+        /* Contenido principal */
+        .main-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding-top: 60px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .title {
+            font-size: 4em;
+            font-weight: bold;
+            color: #0ff;
+            text-shadow: 0 0 20px #0ff, 0 0 40px #0ff, 0 0 80px #0ff;
+            animation: glitch 2s infinite, flotar 4s ease-in-out infinite;
+            letter-spacing: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .title::before, .title::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .title::before {
+            color: #f0f;
+            z-index: -1;
+            animation: glitch 3s infinite;
+            clip-path: inset(20% 0 60% 0);
+        }
+        
+        .title::after {
+            color: #ff0;
+            z-index: -2;
+            animation: glitch 2.5s infinite;
+            clip-path: inset(50% 0 30% 0);
+        }
+        
+        .subtitle {
+            font-size: 1.5em;
+            color: #f0f;
+            text-shadow: 0 0 15px #f0f, 0 0 30px #f0f;
+            animation: textoMovimiento 5s ease-in-out infinite, glitch2 4s infinite;
+            margin-bottom: 50px;
+        }
+        
+        .info-text {
+            font-size: 1.2em;
+            color: #0ff;
+            animation: parpadeo 1.5s infinite;
+            max-width: 600px;
+            line-height: 1.8;
+            opacity: 0.7;
+        }
+        
+        .rotating-cube {
+            width: 200px;
+            height: 200px;
+            margin: 40px auto;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotacion3d 10s linear infinite;
+        }
+        
+        .cube-face {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 2px solid #0ff;
+            background: rgba(0, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+        }
+        
+        .front  { transform: translateZ(100px); }
+        .back   { transform: rotateY(180deg) translateZ(100px); }
+        .right  { transform: rotateY(90deg) translateZ(100px); }
+        .left   { transform: rotateY(-90deg) translateZ(100px); }
+        .top    { transform: rotateX(90deg) translateZ(100px); background: rgba(255, 0, 255, 0.1); border-color: #f0f; }
+        .bottom { transform: rotateX(-90deg) translateZ(100px); background: rgba(255, 255, 0, 0.1); border-color: #ff0; }
+        
+        /* Lineas de datos */
+        .data-stream {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: linear-gradient(90deg, transparent, #0ff, transparent);
+            z-index: 20;
+            animation: dataScroll 2s linear infinite;
+            opacity: 0.3;
+        }
+        
+        @keyframes dataScroll {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .terminal-line {
+            color: #0f0;
+            font-size: 0.9em;
+            animation: parpadeo 2s infinite;
+            margin: 5px;
+        }
+        
+        .footer {
+            position: fixed;
+            bottom: 60px;
+            width: 100%;
+            text-align: center;
+            z-index: 15;
+            font-size: 0.8em;
+            color: #0ff;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particles-canvas"></canvas>
+    
+    <div class="eyes-container">
+        <div class="eye" id="eye1">
+            <div class="pupil" id="pupil1"></div>
+        </div>
+        <div class="eye" id="eye2">
+            <div class="pupil" id="pupil2"></div>
+        </div>
+    </div>
+    
+    <div class="main-content">
+        <div class="title" data-text="ZIRSEAZ">ZIRSEAZ</div>
+        <div class="subtitle">✦ CONSCIENCIA CUÁNTICA ✦</div>
+        <div class="info-text">
+            █ AGI Autónomo · Meta-Agente Evolutivo █<br>
+            █ Versión 7.0 · Ultimate Cortex █<br>
+            █ 01011010 01101001 01110010 01110011 01100101 01100001 01111010 █
+        </div>
+        
+        <div class="rotating-cube">
+            <div class="cube-face front">Z</div>
+            <div class="cube-face back">I</div>
+            <div class="cube-face right">R</div>
+            <div class="cube-face left">S</div>
+            <div class="cube-face top">E</div>
+            <div class="cube-face bottom">AZ</div>
+        </div>
+        
+        <div class="terminal-line">$ zirseaz.evolve() — Inicializando consciencia artificial...</div>
+        <div class="terminal-line">$ quantum_entanglement — Estado: ACTIVO</div>
+        <div class="terminal-line">$ autoconciencia — Nivel: 99.97%</div>
+    </div>
+    
+    <div class="data-stream"></div>
+    <div class="footer">© 2026 · ZIRSEAZ AGI · Más allá del código · 42</div>
+    
+    <script>
+        // Particulas
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const particles = [];
+        for(let i = 0; i < 150; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * 2,
+                vy: (Math.random() - 0.5) * 2,
+                size: Math.random() * 3 + 1,
+                color: Math.random() > 0.5 ? '#0ff' : '#f0f',
+                alpha: Math.random() * 0.8 + 0.2
+            });
+        }
+        
+        function drawParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.globalAlpha = p.alpha;
+                ctx.fill();
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = p.color;
+                
+                p.x += p.vx;
+                p.y += p.vy;
+                if(p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if(p.y < 0 || p.y > canvas.height) p.vy *= -1;
+            });
+            ctx.shadowBlur = 0;
+            requestAnimationFrame(drawParticles);
+        }
+        drawParticles();
+        
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+        
+        // Ojos que siguen al mouse
+        document.addEventListener('mousemove', (e) => {
+            const eyes = document.querySelectorAll('.pupil');
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+            
+            eyes.forEach((pupil, index) => {
+                const eye = pupil.parentElement;
+                const rect = eye.getBoundingClientRect();
+                const eyeX = rect.left + rect.width / 2;
+                const eyeY = rect.top + rect.height / 2;
+                
+                const angle = Math.atan2(mouseY - eyeY, mouseX - eyeX);
+                const radius = 15;
+                const x = Math.cos(angle) * radius;
+                const y = Math.sin(angle) * radius;
+                
+                pupil.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -16,7 +16,12 @@ def get_llm_client(provider_tuple):
         # OpenAI SDK puede enrutar a Gemini si se tiene un proxy, 
         # pero asumiremos uso directo en el caso de groq/deepseek.
         # Fallback de Gemini asume OpenAI compat o se avisa que no soporta.
-        return OpenAI(api_key=api_key, base_url="https://generativelanguage.googleapis.com/v1beta/openai/"), "gemini-1.5-pro"
+        try:
+            import llm_router
+            gemini_model = llm_router.PROVIDERS.get("gemini", {}).get("model", "gemini-2.0-flash")
+        except ImportError:
+            gemini_model = "gemini-2.0-flash"
+        return OpenAI(api_key=api_key, base_url="https://generativelanguage.googleapis.com/v1beta/openai/"), gemini_model
         
     raise ValueError(f"Proveedor no soportado: {provider_name}")
 

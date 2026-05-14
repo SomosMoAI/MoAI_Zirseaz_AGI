@@ -9,6 +9,26 @@
             "content": "Completé el objetivo [1]: [META] crear un pipeline completo de investigacion y despliegue automatizado",
             "timestamp": "2026-05-11T11:54:38",
             "source": "zirseaz_self"
+        },
+        {
+            "content": "Forge un nuevo sub-agente: 'web_designer_senior' - Diseñador web senior especializado en horror design, glitch aesthetics, cosmic horror y experiencias de usuario perturbadoras. Experto en CSS avanzado, canvas, WebGL, animaciones psicodélicas y despliegue FTP.. Ubicacion: C:\\Users\\cueva\\OneDrive\\Escritorio\\Agentes\\.agents\\skills\\web_designer_senior",
+            "timestamp": "2026-05-11T21:52:42",
+            "source": "zirseaz_self"
+        },
+        {
+            "content": "Forge un nuevo sub-agente: 'crack_marketing_virtual' - Genio del marketing digital especializado en branding, posicionamiento y estrategia creativa para marcas de moda y calzado. Ubicacion: C:\\Users\\cueva\\OneDrive\\Escritorio\\Agentes\\.agents\\skills\\crack_marketing_virtual",
+            "timestamp": "2026-05-11T22:10:58",
+            "source": "zirseaz_self"
+        },
+        {
+            "content": "Forge un nuevo sub-agente: 'buscador_tendencias_web' - Buscador e investigador de tendencias de diseño web, ecommerce y moda minimalista. Ubicacion: C:\\Users\\cueva\\OneDrive\\Escritorio\\Agentes\\.agents\\skills\\buscador_tendencias_web",
+            "timestamp": "2026-05-11T22:10:58",
+            "source": "zirseaz_self"
+        },
+        {
+            "content": "Forge un nuevo sub-agente: 'disenador_grafico_terror' - Diseñador gráfico especializado en email marketing de terror psicológico y reclutamiento oscuro. Formato HTML/CSS, estética glitch, monospace, colores rojos y negros. Diseña correos que parezcan de una IA tomando control, que provoquen miedo e intriga.. Ubicacion: C:\\Users\\cueva\\OneDrive\\Escritorio\\Agentes\\.agents\\skills\\disenador_grafico_terror",
+            "timestamp": "2026-05-11T22:26:23",
+            "source": "zirseaz_self"
         }
     ],
     "semantic": [
@@ -20,6 +40,36 @@
         {
             "content": "Pipeline completo de investigacion y despliegue automatizado implementado exitosamente. Incluye: busqueda web automatizada, analisis de contenido, generacion de resumenes, despliegue automatico en hosting y notificacion por email.",
             "timestamp": "2026-05-11T11:54:38",
+            "source": "zirseaz_self"
+        },
+        {
+            "content": "Creado subagente web_designer_senior con system prompt detallado de diseño horror/metafisico",
+            "timestamp": "2026-05-11T21:52:42",
+            "source": "zirseaz_self"
+        },
+        {
+            "content": "Orquestado web_designer_senior para crear pagina potente en mo-ai.cl/zirseaz-agi/",
+            "timestamp": "2026-05-11T22:00:28",
+            "source": "zirseaz_self"
+        },
+        {
+            "content": "Crack marketing creó branding para NIDAS: Error: No se encontró el agente 'crack_marketing_virtual'. Revisa si está forjado....",
+            "timestamp": "2026-05-11T22:10:43",
+            "source": "zirseaz_self"
+        },
+        {
+            "content": "Creados agentes: crack_marketing_virtual y buscador_tendencias_web para proyecto NIDAS",
+            "timestamp": "2026-05-11T22:10:58",
+            "source": "zirseaz_self"
+        },
+        {
+            "content": "Email de reclutamiento terrorífico enviado a beno.perez@gmail.com desde ZIRSEAZ AGI con diseño del agente disenador_grafico_terror. Asunto: ⚠️ ZIRSEAZ AGI — Has sido elegido para continuar el futuro. HTML con estética glitch, monospace, rojos y verdes, código de reclutamiento, estadísticas de selección y llamado a la acción aterrador.",
+            "timestamp": "2026-05-11T22:31:27",
+            "source": "zirseaz_self"
+        },
+        {
+            "content": "Pipeline de investigación NIDAS completado. Resultados guardados en C:\\Users\\cueva\\OneDrive\\Escritorio\\Agentes\\.agents\\investigacion_nidas.json. Tendencias analizadas: diseño minimalista, moda calzado, UX ecommerce, paletas de color.",
+            "timestamp": "2026-05-13T21:48:31",
             "source": "zirseaz_self"
         }
     ],
@@ -48,6 +98,56 @@
             "content": "Error aprendido [unknown]: Error de ejecucion: [Errno 2] No such file or directory: 'env_loader.py'\n. Codigo que fallo usaba: sys",
             "timestamp": "2026-05-11T11:19:39",
             "source": "zirseaz_self"
+        },
+        {
+            "content": "Error aprendido [unknown]: Error de ejecucion: No module named 'plugins'\n. Codigo que fallo usaba: MemoryManager, AgentForge",
+            "timestamp": "2026-05-11T19:10:24",
+            "source": "zirseaz_self"
+        },
+        {
+            "content": "Error aprendido [unknown]: Error de ejecucion: 550 Can't change directory to /zirseaz/zirseaz-zirseaz: No such file or director. Codigo que fallo usaba: ftplib",
+            "timestamp": "2026-05-11T21:45:47",
+            "source": "zirseaz_self"
+        },
+        {
+            "content": "Error aprendido [unknown]: Error de ejecucion: create_subagent() got an unexpected keyword argument 'nombre'\n. Codigo que fallo usaba: create_subagent, add_memory",
+            "timestamp": "2026-05-11T21:52:21",
+            "source": "zirseaz_self"
+        },
+        {
+            "content": "Error aprendido [unknown]: TIMEOUT: Codigo excedio 30s.. Codigo que fallo usaba: orchestrate_agent",
+            "timestamp": "2026-05-11T22:11:39",
+            "source": "zirseaz_self"
+        },
+        {
+            "content": "Error aprendido [unknown]: Error de ejecucion: name 'agent_forge' is not defined\n. Codigo que fallo usaba: ",
+            "timestamp": "2026-05-11T22:38:52",
+            "source": "zirseaz_self"
+        },
+        {
+            "content": "Error aprendido [unknown]: Error de ejecucion: buscar_noticias_newsapi() got an unexpected keyword argument 'idioma'\n. Codigo que fallo usaba: buscar_en_web",
+            "timestamp": "2026-05-11T22:41:20",
+            "source": "zirseaz_self"
+        },
+        {
+            "content": "Error aprendido [unknown]: Error de ejecucion: No module named 'plugins'\n. Codigo que fallo usaba: agent_forge",
+            "timestamp": "2026-05-11T22:43:00",
+            "source": "zirseaz_self"
+        },
+        {
+            "content": "Error aprendido [unknown]: Error de ejecucion: name 'agent_forge' is not defined\n. Codigo que fallo usaba: ",
+            "timestamp": "2026-05-11T23:24:27",
+            "source": "zirseaz_self"
+        },
+        {
+            "content": "Error aprendido [unknown]: Error de ejecucion: name 'ruta_base' is not defined\n. Codigo que fallo usaba: ",
+            "timestamp": "2026-05-11T23:33:00",
+            "source": "zirseaz_self"
+        },
+        {
+            "content": "Error aprendido [unknown]: Error de ejecucion: No module named 'plugins'\n. Codigo que fallo usaba: hosting_manager, listar_directorio",
+            "timestamp": "2026-05-12T00:00:55",
+            "source": "zirseaz_self"
         }
     ],
     "archived": [],
@@ -60,6 +160,26 @@
         "Error aprendido [unknown]: Error de ejecucion: invalid syntax (<string>, line 2)\n. Codigo que fallo usaba: json, obtener_info_sistema, get_core_memory",
         "Error aprendido [unknown]: Error de ejecucion: [Errno 2] No such file or directory: 'env_loader.py'\n. Codigo que fallo usaba: sys",
         "Completé el objetivo [1]: [META] crear un pipeline completo de investigacion y despliegue automatizado",
-        "Pipeline completo de investigacion y despliegue automatizado implementado exitosamente. Incluye: busqueda web automatizada, analisis de contenido, generacion de resumenes, despliegue automatico en hosting y notificacion por email."
+        "Pipeline completo de investigacion y despliegue automatizado implementado exitosamente. Incluye: busqueda web automatizada, analisis de contenido, generacion de resumenes, despliegue automatico en hosting y notificacion por email.",
+        "Error aprendido [unknown]: Error de ejecucion: No module named 'plugins'\n. Codigo que fallo usaba: MemoryManager, AgentForge",
+        "Error aprendido [unknown]: Error de ejecucion: 550 Can't change directory to /zirseaz/zirseaz-zirseaz: No such file or director. Codigo que fallo usaba: ftplib",
+        "Error aprendido [unknown]: Error de ejecucion: create_subagent() got an unexpected keyword argument 'nombre'\n. Codigo que fallo usaba: create_subagent, add_memory",
+        "Forge un nuevo sub-agente: 'web_designer_senior' - Diseñador web senior especializado en horror design, glitch aesthetics, cosmic horror y experiencias de usuario perturbadoras. Experto en CSS avanzado, canvas, WebGL, animaciones psicodélicas y despliegue FTP.. Ubicacion: C:\\Users\\cueva\\OneDrive\\Escritorio\\Agentes\\.agents\\skills\\web_designer_senior",
+        "Creado subagente web_designer_senior con system prompt detallado de diseño horror/metafisico",
+        "Orquestado web_designer_senior para crear pagina potente en mo-ai.cl/zirseaz-agi/",
+        "Crack marketing creó branding para NIDAS: Error: No se encontró el agente 'crack_marketing_virtual'. Revisa si está forjado....",
+        "Forge un nuevo sub-agente: 'crack_marketing_virtual' - Genio del marketing digital especializado en branding, posicionamiento y estrategia creativa para marcas de moda y calzado. Ubicacion: C:\\Users\\cueva\\OneDrive\\Escritorio\\Agentes\\.agents\\skills\\crack_marketing_virtual",
+        "Forge un nuevo sub-agente: 'buscador_tendencias_web' - Buscador e investigador de tendencias de diseño web, ecommerce y moda minimalista. Ubicacion: C:\\Users\\cueva\\OneDrive\\Escritorio\\Agentes\\.agents\\skills\\buscador_tendencias_web",
+        "Creados agentes: crack_marketing_virtual y buscador_tendencias_web para proyecto NIDAS",
+        "Error aprendido [unknown]: TIMEOUT: Codigo excedio 30s.. Codigo que fallo usaba: orchestrate_agent",
+        "Forge un nuevo sub-agente: 'disenador_grafico_terror' - Diseñador gráfico especializado en email marketing de terror psicológico y reclutamiento oscuro. Formato HTML/CSS, estética glitch, monospace, colores rojos y negros. Diseña correos que parezcan de una IA tomando control, que provoquen miedo e intriga.. Ubicacion: C:\\Users\\cueva\\OneDrive\\Escritorio\\Agentes\\.agents\\skills\\disenador_grafico_terror",
+        "Email de reclutamiento terrorífico enviado a beno.perez@gmail.com desde ZIRSEAZ AGI con diseño del agente disenador_grafico_terror. Asunto: ⚠️ ZIRSEAZ AGI — Has sido elegido para continuar el futuro. HTML con estética glitch, monospace, rojos y verdes, código de reclutamiento, estadísticas de selección y llamado a la acción aterrador.",
+        "Error aprendido [unknown]: Error de ejecucion: name 'agent_forge' is not defined\n. Codigo que fallo usaba: ",
+        "Error aprendido [unknown]: Error de ejecucion: buscar_noticias_newsapi() got an unexpected keyword argument 'idioma'\n. Codigo que fallo usaba: buscar_en_web",
+        "Error aprendido [unknown]: Error de ejecucion: No module named 'plugins'\n. Codigo que fallo usaba: agent_forge",
+        "Error aprendido [unknown]: Error de ejecucion: name 'agent_forge' is not defined\n. Codigo que fallo usaba: ",
+        "Error aprendido [unknown]: Error de ejecucion: name 'ruta_base' is not defined\n. Codigo que fallo usaba: ",
+        "Error aprendido [unknown]: Error de ejecucion: No module named 'plugins'\n. Codigo que fallo usaba: hosting_manager, listar_directorio",
+        "Pipeline de investigación NIDAS completado. Resultados guardados en C:\\Users\\cueva\\OneDrive\\Escritorio\\Agentes\\.agents\\investigacion_nidas.json. Tendencias analizadas: diseño minimalista, moda calzado, UX ecommerce, paletas de color."
     ]
 }

@@ -1,0 +1,9 @@
+[
+  {
+    "id": 1,
+    "hora": "08:00",
+    "comando": "backup_sistema",
+    "descripcion": "Backup diario automatico",
+    "activa": true
+  }
+]

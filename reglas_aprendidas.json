@@ -1,0 +1,6 @@
+{
+  "imports_faltantes": "Siempre usar sys.path.insert(0, ...) antes de importar modulos custom",
+  "ftp_paths": "El hosting sirve desde /zirseaz/, no desde la raiz",
+  "timeout": "No usar os.walk ni loops largos. Timeout max 30s",
+  "undefined_vars": "Verificar que la funcion existe en el scope antes de llamarla"
+}

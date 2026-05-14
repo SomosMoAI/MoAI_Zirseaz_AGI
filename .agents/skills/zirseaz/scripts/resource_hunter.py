@@ -102,7 +102,12 @@ def check_api_health():
     if "gemini" in keys:
         try:
             if HAS_REQUESTS:
-                url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={keys['gemini']}"
+                try:
+                    import llm_router
+                    gemini_model = llm_router.PROVIDERS.get("gemini", {}).get("model", "gemini-2.0-flash")
+                except ImportError:
+                    gemini_model = "gemini-2.0-flash"
+                url = f"https://generativelanguage.googleapis.com/v1beta/models/{gemini_model}:generateContent?key={keys['gemini']}"
                 resp = requests.post(url, json={"contents": [{"parts":[{"text": "ping"}]}]}, timeout=10)
                 if resp.status_code == 200:
                     return True, "Gemini Ok", ("gemini", keys["gemini"])

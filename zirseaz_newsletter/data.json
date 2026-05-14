@@ -1,5 +1,15 @@
 {
   "subs": [],
   "income": 0,
-  "created": "2026-05-10T12:09:53.818585"
+  "created": "2026-05-10T12:09:53.818585",
+  "plans": {
+    "starter": {"price": 0, "features": ["newsletter", "archivo", "resumen"]},
+    "pro": {"price": 9.99, "features": ["starter", "analisis", "reportes", "discord", "no_ads"]},
+    "enterprise": {"price": 29.99, "features": ["pro", "consulting", "implementacion", "early_access", "soporte_247"]}
+  },
+  "editions": [
+    {"id": "001", "title": "El Amanecer de los Agentes Autónomos", "date": "2026-05-10", "read_time": 8},
+    {"id": "002", "title": "Cómo la IA Está Rediseñando el Ecommerce", "date": "2026-05-17", "read_time": 12},
+    {"id": "003", "title": "Prompt Engineering: El Arte de Hablar con Máquinas", "date": "2026-05-24", "read_time": 10}
+  ]
 }

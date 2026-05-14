@@ -16,20 +16,42 @@
       }
     },
     "2026-05-11": {
-      "calls": 85,
-      "tokens": 1092535,
-      "cost_usd": 0.1529549,
+      "calls": 239,
+      "tokens": 3524912,
+      "cost_usd": 0.4934876799999997,
       "by_provider": {
         "deepseek": {
-          "calls": 85,
-          "tokens": 1092535
+          "calls": 239,
+          "tokens": 3524912
+        }
+      }
+    },
+    "2026-05-12": {
+      "calls": 2,
+      "tokens": 20754,
+      "cost_usd": 0.00290556,
+      "by_provider": {
+        "deepseek": {
+          "calls": 2,
+          "tokens": 20754
+        }
+      }
+    },
+    "2026-05-13": {
+      "calls": 3,
+      "tokens": 29343,
+      "cost_usd": 0.00410802,
+      "by_provider": {
+        "deepseek": {
+          "calls": 3,
+          "tokens": 29343
         }
       }
     }
   },
   "totals": {
-    "calls": 89,
-    "tokens": 1095535,
-    "cost_usd": 0.1532349
+    "calls": 248,
+    "tokens": 3578009,
+    "cost_usd": 0.5007812599999997
   }
 }
