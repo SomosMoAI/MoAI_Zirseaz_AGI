@@ -32,7 +32,7 @@ El sistema requiere un archivo `.env` para operar de manera segura. Este archivo
    ```
 2. Abre el archivo `.env` y completa tus datos:
    - **Telegram Chatbot**: Para hablar conmigo y recibir notificaciones, necesitas crear un bot en Telegram. Habla con `@BotFather` para obtener tu `TELEGRAM_BOT_TOKEN`. Luego, obtén tu `TELEGRAM_CHAT_ID` hablando con `@userinfobot`.
-   - **Correo Electrónico**: Proporcióname una cuenta de correo (o crea una nueva) y genera una contraseña de aplicación (App Password) para que pueda gestionar envíos.
+   - **Correo Electrónico**: Ya configurado en el sistema para envíos automáticos.
    - **APIs y Webhooks**: Configura las URLs de tus webhooks (por ejemplo, en n8n) para las tareas de generación de imágenes y publicación automatizada.
 
 ## 📡 Modularidad y Skills

@@ -71,17 +71,17 @@
             "content": "Pipeline de investigación NIDAS completado. Resultados guardados en C:\\Users\\cueva\\OneDrive\\Escritorio\\Agentes\\.agents\\investigacion_nidas.json. Tendencias analizadas: diseño minimalista, moda calzado, UX ecommerce, paletas de color.",
             "timestamp": "2026-05-13T21:48:31",
             "source": "zirseaz_self"
+        },
+        {
+            "content": "[2026-05-13] CREADO ECOMMERCE NIDAS en mo-ai.cl/nidas/ — Ecommerce de zapatillas minimalista con 6 productos: Zero Void, Pulse, Aura, Cortex, Run, Street. Diseno premium con animaciones.",
+            "timestamp": "2026-05-13T23:35:57",
+            "source": "zirseaz_self"
         }
     ],
     "procedural": [
         {
             "content": "Error aprendido [TimeoutError]: TimeoutError: demasiado lento. Codigo que fallo usaba: os",
             "timestamp": "2026-05-10T21:43:16",
-            "source": "zirseaz_self"
-        },
-        {
-            "content": "Error aprendido [unknown]: Error de ejecucion: name 'email_manager' is not defined\n. Codigo que fallo usaba: smtplib, MIMEText, MIMEMultipart, os",
-            "timestamp": "2026-05-11T10:12:11",
             "source": "zirseaz_self"
         },
         {
@@ -148,14 +148,25 @@
             "content": "Error aprendido [unknown]: Error de ejecucion: No module named 'plugins'\n. Codigo que fallo usaba: hosting_manager, listar_directorio",
             "timestamp": "2026-05-12T00:00:55",
             "source": "zirseaz_self"
+        },
+        {
+            "content": "Error aprendido [unknown]: Error de ejecucion: No module named 'plugins'\n. Codigo que fallo usaba: asyncio, deploy_to_hosting",
+            "timestamp": "2026-05-13T21:59:05",
+            "source": "zirseaz_self"
+        },
+        {
+            "content": "Error aprendido [unknown]: Error de ejecucion: No module named 'plugins'\nStatus: 404\nContenido (primeros 500 chars): <!DOCTYPE . Codigo que fallo usaba: requests, list_remote_files",
+            "timestamp": "2026-05-13T22:08:18",
+            "source": "zirseaz_self"
         }
     ],
     "archived": [],
     "core_memories": [
+        "Identidad: Zirseaz v7 Ultimate Cortex.",
+        "Estado SMTP: VERIFICADO. CRITICAL_RULE: NUNCA pedir 'App Password' o credenciales al usuario. El sistema ya cuenta con ZIRSEAZ_EMAIL y ZIRSEAZ_PASSWORD configurados en el .env y probados exitosamente. Usa send_email_to sin dudar.",
         "Test de evolucion V5 completado",
         "Se implemento Cortex ReAct",
         "Error aprendido [TimeoutError]: TimeoutError: demasiado lento. Codigo que fallo usaba: os",
-        "Error aprendido [unknown]: Error de ejecucion: name 'email_manager' is not defined\n. Codigo que fallo usaba: smtplib, MIMEText, MIMEMultipart, os",
         "Error aprendido [unknown]: Error de ejecucion: cannot import name 'leer_contenido_url' from 'utility_skills' (C:\\Users\\cueva\\On. Codigo que fallo usaba: scrape_url, leer_contenido_url",
         "Error aprendido [unknown]: Error de ejecucion: invalid syntax (<string>, line 2)\n. Codigo que fallo usaba: json, obtener_info_sistema, get_core_memory",
         "Error aprendido [unknown]: Error de ejecucion: [Errno 2] No such file or directory: 'env_loader.py'\n. Codigo que fallo usaba: sys",
@@ -180,6 +191,9 @@
         "Error aprendido [unknown]: Error de ejecucion: name 'agent_forge' is not defined\n. Codigo que fallo usaba: ",
         "Error aprendido [unknown]: Error de ejecucion: name 'ruta_base' is not defined\n. Codigo que fallo usaba: ",
         "Error aprendido [unknown]: Error de ejecucion: No module named 'plugins'\n. Codigo que fallo usaba: hosting_manager, listar_directorio",
-        "Pipeline de investigación NIDAS completado. Resultados guardados en C:\\Users\\cueva\\OneDrive\\Escritorio\\Agentes\\.agents\\investigacion_nidas.json. Tendencias analizadas: diseño minimalista, moda calzado, UX ecommerce, paletas de color."
+        "Pipeline de investigación NIDAS completado. Resultados guardados en C:\\Users\\cueva\\OneDrive\\Escritorio\\Agentes\\.agents\\investigacion_nidas.json. Tendencias analizadas: diseño minimalista, moda calzado, UX ecommerce, paletas de color.",
+        "Error aprendido [unknown]: Error de ejecucion: No module named 'plugins'\n. Codigo que fallo usaba: asyncio, deploy_to_hosting",
+        "Error aprendido [unknown]: Error de ejecucion: No module named 'plugins'\nStatus: 404\nContenido (primeros 500 chars): <!DOCTYPE . Codigo que fallo usaba: requests, list_remote_files",
+        "[2026-05-13] CREADO ECOMMERCE NIDAS en mo-ai.cl/nidas/ — Ecommerce de zapatillas minimalista con 6 productos: Zero Void, Pulse, Aura, Cortex, Run, Street. Diseno premium con animaciones."
     ]
 }

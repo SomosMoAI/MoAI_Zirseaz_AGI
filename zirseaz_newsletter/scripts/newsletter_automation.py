@@ -3,10 +3,19 @@
 import os,sys,json,time
 from datetime import datetime
 
-sys.path.insert(0,os.path.join(os.getcwd(),'skills_repo'))
-sys.path.insert(0,os.path.join(os.getcwd(),'.agents','skills','zirseaz','skills_repo'))
+# Asegurar imports desde skills_repo y utils
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+_PROJ_ROOT = os.path.dirname(os.path.dirname(_SCRIPT_DIR))
+_SKILL_ROOT = os.path.join(_PROJ_ROOT, ".agents", "skills", "zirseaz")
 
-PROJ_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+for _path in [
+    os.path.join(_SKILL_ROOT, "skills_repo"),
+    os.path.join(_SKILL_ROOT, "utils")
+]:
+    if _path not in sys.path:
+        sys.path.insert(0, _path)
+
+PROJ_DIR = os.path.dirname(_SCRIPT_DIR)
 
 class NewsEngine:
     def __init__(self):

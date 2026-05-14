@@ -24,28 +24,14 @@ except ImportError:
 
 
 def _get_email_credentials():
-    """Obtiene credenciales de email con múltiples fuentes de fallback."""
+    """Obtiene credenciales de email usando env_loader centralizado."""
     if env_loader:
-        return env_loader.get_email_credentials()
+        email, password = env_loader.get_email_credentials()
+        if email and password:
+            return email, password
     
-    # Fallback manual si env_loader no está disponible (ej. en HuggingFace)
-    sender_email = os.environ.get("ZIRSEAZ_EMAIL")
-    sender_password = os.environ.get("ZIRSEAZ_PASSWORD")
-    
-    if not sender_email or not sender_password:
-        env_path = os.path.join(os.getcwd(), ".env")
-        if not os.path.exists(env_path):
-            env_path = os.path.join(os.path.dirname(os.getcwd()), ".env")
-            
-        if os.path.exists(env_path):
-            with open(env_path, "r", encoding="utf-8") as f:
-                for line in f:
-                    if line.startswith("ZIRSEAZ_EMAIL="):
-                        sender_email = line.split("=")[1].strip()
-                    elif line.startswith("ZIRSEAZ_PASSWORD="):
-                        sender_password = line.split("=")[1].strip()
-                        
-    return sender_email, sender_password
+    # Fallback directo a os.environ si env_loader falla o no tiene las keys
+    return os.environ.get("ZIRSEAZ_EMAIL"), os.environ.get("ZIRSEAZ_PASSWORD")
 
 
 def send_email_to(recipient_email, subject, body):
@@ -56,7 +42,7 @@ def send_email_to(recipient_email, subject, body):
     sender_email, sender_password = _get_email_credentials()
     
     if not sender_email or not sender_password:
-        return "Error: Faltan credenciales ZIRSEAZ_EMAIL o ZIRSEAZ_PASSWORD."
+        return "Error: Faltan credenciales ZIRSEAZ_EMAIL o ZIRSEAZ_PASSWORD en el entorno."
         
     msg = MIMEMultipart()
     msg['From'] = sender_email
@@ -74,7 +60,8 @@ def send_email_to(recipient_email, subject, body):
         server.quit()
         return f"Exito: Correo enviado a {recipient_email}."
     except Exception as e:
-        return f"Error enviando correo: {e}. (Gmail requiere 'Contrasena de Aplicacion' para SMTP)."
+        # Error limpio para no inducir a error al LLM
+        return f"Error SMTP: {str(e)}"
 
 
 def get_unread_emails():
