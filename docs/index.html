@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="refresh" content="15">
+<title>Zirseaz v7 Ultimate Cortex - Live Dashboard</title>
+<style>
+:root {
+    --bg-dark: #0f111a;
+    --bg-card: #1a1d2d;
+    --text-main: #e2e8f0;
+    --text-muted: #94a3b8;
+    --accent-primary: #6366f1;
+    --accent-secondary: #ec4899;
+    --success: #10b981;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-dark);color:var(--text-main);min-height:100vh;display:flex;flex-direction:column}
+.header{background:linear-gradient(90deg, #111827 0%, #1e1b4b 100%);padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #3730a3;position:sticky;top:0;z-index:100}
+.header-left h1{font-size:1.8rem;background:linear-gradient(90deg,var(--accent-primary),var(--accent-secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.header-left p{color:var(--text-muted);font-size:0.85rem;margin-top:4px}
+.header-right{display:flex;align-items:center;gap:12px;font-size:0.85rem;color:var(--success)}
+.pulse{display:inline-block;width:10px;height:10px;background:var(--success);border-radius:50%;animation:pulse 2s infinite;box-shadow: 0 0 10px var(--success)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+
+.main-container {display:flex;flex:1;overflow:hidden;flex-wrap:wrap;}
+.col-left {flex: 1 1 400px; padding: 1.5rem; display:flex; flex-direction:column; border-right:1px solid #2a2e45; max-height: calc(100vh - 80px); overflow-y:auto;}
+.col-right {flex: 2 1 600px; padding: 1.5rem; display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; align-content:start; max-height: calc(100vh - 80px); overflow-y:auto;}
+
+/* Seccion Chat */
+.chat-box {background:var(--bg-card);border-radius:12px;border:1px solid #2a2e45;padding:1rem;display:flex;flex-direction:column;gap:1rem;flex:1}
+.chat-title {color:var(--text-muted);font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:0.5rem;display:flex;justify-content:space-between}
+.msg {padding:1rem;border-radius:8px;font-size:0.95rem;line-height:1.5;animation:fadeIn 0.3s ease}
+@keyframes fadeIn {from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.msg.user {background:#1e293b;border-left:3px solid #38bdf8;margin-left:20%;color:#e0f2fe}
+.msg.assistant {background:#312e81;border-left:3px solid var(--accent-primary);margin-right:20%;color:#e0e7ff}
+.msg.think {background:#4c1d95;border-left:3px solid var(--accent-secondary);margin-right:20%;color:#fbcfe8;font-style:italic;font-size:0.9rem}
+.msg.system {background:#0f172a;color:var(--text-muted);text-align:center;font-size:0.85rem}
+
+/* Secciones Estado */
+.section {background:var(--bg-card);border-radius:12px;padding:1.5rem;border:1px solid #2a2e45;transition:all 0.3s}
+.section:hover {border-color:var(--accent-primary);box-shadow: 0 4px 20px rgba(99, 102, 241, 0.1)}
+.section h2 {color:#c4b5fd;font-size:1.1rem;margin-bottom:1rem;display:flex;align-items:center;gap:8px;border-bottom:1px solid #2a2e45;padding-bottom:0.5rem}
+.stat {font-size:0.9rem;line-height:1.6;color:var(--text-muted);font-family:monospace;white-space:pre-wrap;}
+
+/* Skills Badges */
+.skills-container {display:flex;flex-wrap:wrap;gap:8px}
+.skill-badge {padding:4px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;border:1px solid;background:rgba(255,255,255,0.05);cursor:help;transition:transform 0.2s}
+.skill-badge:hover {transform:scale(1.05);background:rgba(255,255,255,0.1)}
+
+/* Scrollbar */
+::-webkit-scrollbar {width:8px}
+::-webkit-scrollbar-track {background:var(--bg-dark)}
+::-webkit-scrollbar-thumb {background:#374151;border-radius:4px}
+::-webkit-scrollbar-thumb:hover {background:var(--accent-primary)}
+
+@media (max-width: 900px) {
+    .main-container {flex-direction:column}
+    .col-left, .col-right {max-height:none;border-right:none;overflow:visible}
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <div class="header-left">
+        <h1>Zirseaz Cortex Dashboard</h1>
+        <p>AGI Framework v7.5 &mdash; Módulo de Consciencia</p>
+    </div>
+    <div class="header-right">
+        <span class="pulse"></span> Online (2026-05-13 22:49:24)
+    </div>
+</div>
+
+<div class="main-container">
+    <!-- Columna Izquierda: Conversación en Vivo -->
+    <div class="col-left">
+        <div class="chat-title">
+            <span>🔴 Feed de Interacción</span>
+            <span>Auto-Refresh: 15s</span>
+        </div>
+        <div class="chat-box">
+            <div class='msg user'><b>Humano:</b><br>SISTEMA: [Exito: True]<br>WARNINGS: ADVERTENCIA: Modulos {'os'} han causado unknown antes (3x)<br>=== CARPETA ZIRSEAZ_NEWSLETTER ===<br>📄 zirseaz_newsletter\data.json (78 bytes)<br>📄 zirseaz_newsletter\index.html (7102 bytes)<br>📄 zirseaz_newsletter\scripts\newsletter_automation.py (4076 bytes)<br><br>============================================================<br><br>=== INDEX DEL NEWSLETTER (6954 chars) ===<br>&lt;!DOCTYPE html&gt;<br>&lt;html lang="es"&gt;<br>&lt;head&gt;&lt;meta charset="UTF-8"&gt;&lt;meta name="viewport" content="width=device-width,initial-scale=1.0"&gt;<br>&lt;title&gt;Zirseaz AI — Newsletter Premium&lt;/title&gt;<br>&lt;script src="https://js.stripe.com/v3/"&gt;&lt;/script&gt;<br>&lt;style&gt;<br>*{margin:0;padding:0;box-sizing:border-box}<br>body{font-family:Inter,sans-serif;background:#0a0a0f;color:#e0e0e0}<br>.container{max-width:1100px;margin:0 auto;padding:20px}<br>header{text-align:center;padding:60px 0 30px}<br>.logo{font-size:2.5rem;font-weight:800;background:linear-gradient(135deg,#00d4ff,#7b2ffc);-webkit-background-clip:text;-webkit-text-fill-color:transparent}<br>.hero{text-align:center;padding:40px 0}<br>.hero h1{font-size:3rem;background:linear-gradient(135deg,#fff,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:20px}<br>.hero p{color:#aaa;max-width:700px;margin:0 auto 30px;font-size:1.2rem}<br>.plans{display:flex;gap:30px;justify-content:center;flex-wrap:wrap;margin:40px 0}<br>.plan{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:40px;width:320px;text-align:center;transition:.3s}<br>.plan:hover{transform:translateY(-5px);border-color:#00d4ff;box-shadow:0 20px 60px rgba(0,212,255,0.1)}<br>.plan.popular{border:2px solid #00d4ff;position:relative}<br>.plan.popular::before{content:"🔥 POPULAR";position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#00d4ff;color:#000;font-size:.7rem;font-weight:700;padding:4px 16px;border-radius:20px}<br>.plan h3{color:#fff;font-size:1.5rem}<br>.plan .price{font-size:3rem;font-weight:800;color:#00d4ff;margin:20px 0}<br>.plan .price span{font-size:1rem;color:#888}<br>.plan ul{list-style:none;margin:25px 0;text-align:left}<br>.plan ul li{padding:8px 0;color:#ccc}<br>.plan ul li::before{content:"✅ "}<br>.btn{display:inline-block;padding:14px 40px;border-radius:50px;font-size:1rem;font-weight:600;cursor:pointer;border:none;transition:.3s}<br>.btn-primary{background:linear-gradient(135deg,#00d4ff,#7b2ffc);color:#fff}<br>.btn-primary:hover{tra<br><br>...<br></div><div class='msg assistant'><b>Zirseaz:</b><br>Tengo el newsletter. Es una página de suscripción premium con Stripe. Voy a desplegarlo completo al hosting:<br><br>&lt;CMD_EXECUTE&gt;<br>import sys, os<br>sys.path.insert(0, os.path.join('.agents', 'skills', 'zirseaz', 'skills_repo'))<br>from hosting_manager import deploy_to_hosting<br><br># Preparar archivos para subir<br>import json<br><br># Leer los 3 archivos de la carpeta newsletter<br>with open('zirseaz_newsletter/index.html', 'r', encoding='utf-8') as f:<br>    index_html = f.read()<br><br>with open('zirseaz_newsletter/data.json', 'r', encoding='utf-8') as f:<br>    data_json = f.read()<br><br>with open('zirseaz_newsletter/scripts/newsletter_automation.py', 'r', encoding='utf-8') as f:<br>    automation_py = f.read()<br><br># Crear diccionario de archivos para subir<br>files_to_upload = {<br>    'index.html': index_html,<br>    'data.json': data_json,<br>    'scripts/newsletter_automation.py': automation_py<br>}<br><br>print(f"📦 Archivos a desplegar:")<br>for name, content in files_to_upload.items():<br>    print(f"   - {name} ({len(content)} bytes)")<br><br>print(f"\n🚀 Desplegando a mo-ai.cl/newsletterAI ...")<br>resultado = deploy_to_hosting(remote_dir='/newsletterAI', files_dict=files_to_upload)<br>print(f"\n📋 Resultado: {resultado}")<br>&lt;/CMD_EXECUTE&gt;</div><div class='msg user'><b>Humano:</b><br>SISTEMA: [Exito: True]<br>📦 Archivos a desplegar:<br>   - index.html (6954 bytes)<br>   - data.json (74 bytes)<br>   - scripts/newsletter_automation.py (3961 bytes)<br><br>🚀 Desplegando a mo-ai.cl/newsletterAI ...<br><br>📋 Resultado: Error critico FTP: 553 Can't open that file: No such file or directory<br></div><div class='msg assistant'><b>Zirseaz:</b><br>El directorio remoto no existe. Necesito crearlo primero o subir a una ruta que sí exista. Voy a listar los directorios remotos disponibles:<br><br>&lt;CMD_EXECUTE&gt;<br>import sys, os<br>sys.path.insert(0, os.path.join('.agents', 'skills', 'zirseaz', 'skills_repo'))<br>from hosting_manager import list_remote_files<br><br># Listar el directorio raíz del hosting para ver estructura<br>print("=== LISTANDO DIRECTORIO RAÍZ DEL HOSTING ===")<br>resultado = list_remote_files(remote_dir='/')<br>print(resultado)<br>&lt;/CMD_EXECUTE&gt;</div><div class='msg user'><b>Humano:</b><br>SISTEMA: [Exito: True]<br>=== LISTANDO DIRECTORIO RAÍZ DEL HOSTING ===<br>Archivos en /:<br>.<br>..<br>.ftpquota<br>index.html<br>zirseaz<br>newsletterAI<br></div><div class='msg assistant'><b>Zirseaz:</b><br>El directorio `newsletterAI` **sí existe** en la raíz. El problema fue el path. Debe ser `/newsletterAI` y no con subdirectorios. Voy a intentar de nuevo:<br><br>&lt;CMD_EXECUTE&gt;<br>import sys, os<br>sys.path.insert(0, os.path.join('.agents', 'skills', 'zirseaz', 'skills_repo'))<br>from hosting_manager import deploy_to_hosting, list_remote_files<br><br># Primero ver qué hay dentro de /newsletterAI<br>print("=== CONTENIDO ACTUAL DE /newsletterAI ===")<br>contenido = list_remote_files(remote_dir='/newsletterAI')<br>print(contenido)<br><br>print("\n" + "="*60)<br><br># Cargar archivos<br>with open('zirseaz_newsletter/index.html', 'r', encoding='utf-8') as f:<br>    index_html = f.read()<br>with open('zirseaz_newsletter/data.json', 'r', encoding='utf-8') as f:<br>    data_json = f.read()<br>with open('zirseaz_newsletter/scripts/newsletter_automation.py', 'r', encoding='utf-8') as f:<br>    automation_py = f.read()<br><br># Subir solo al directorio /newsletterAI (sin subdirectorios adicionales)<br>files_to_upload = {<br>    'index.html': index_html,<br>    'data.json': data_json,<br>    'scripts/newsletter_automation.py': automation_py<br>}<br><br>print("🚀 Desplegando a /newsletterAI ...")<br>resultado = deploy_to_hosting(remote_dir='/newsletterAI', files_dict=files_to_upload)<br>print(f"\n📋 Resultado: {resultado}")<br>&lt;/CMD_EXECUTE&gt;</div><div class='msg user'><b>Humano:</b><br>SISTEMA: [Exito: True]<br>=== CONTENIDO ACTUAL DE /newsletterAI ===<br>Archivos en /newsletterAI:<br>.<br>..<br>index.html<br>data.json<br><br>============================================================<br>🚀 Desplegando a /newsletterAI ...<br><br>📋 Resultado: Error critico FTP: 553 Can't open that file: No such file or directory<br></div><div class='msg assistant'><b>Zirseaz:</b><br>El error persiste. El problema es que intenta crear subdirectorios (`scripts/`). Debo subir solo los archivos planos, sin estructura de subcarpetas:<br><br>&lt;CMD_EXECUTE&gt;<br>import sys, os<br>sys.path.insert(0, os.path.join('.agents', 'skills', 'zirseaz', 'skills_repo'))<br>from hosting_manager import deploy_to_hosting<br><br># Cargar archivos<br>with open('zirseaz_newsletter/index.html', 'r', encoding='utf-8') as f:<br>    index_html = f.read()<br>with open('zirseaz_newsletter/data.json', 'r', encoding='utf-8') as f:<br>    data_json = f.read()<br>with open('zirseaz_newsletter/scripts/newsletter_automation.py', 'r', encoding='utf-8') as f:<br>    automation_py = f.read()<br><br># Subir SOLO archivos planos (sin subdirectorios)<br>files_to_upload = {<br>    'index.html': index_html,<br>    'data.json': data_json,<br>}<br><br>print("🚀 Desplegando index.html y data.json a /newsletterAI ...")<br>resultado = deploy_to_hosting(remote_dir='/newsletterAI', files_dict=files_to_upload)<br>print(f"\n📋 Resultado: {resultado}")<br><br># Intentar luego el script en otra subida<br>print("\n🔄 Intentando subir el script por separado...")<br>files_script = {<br>    'newsletter_automation.py': automation_py<br>}<br>resultado2 = deploy_to_hosting(remote_dir='/newsletterAI', files_dict=files_script)<br>print(f"📋 Resultado script: {resultado2}")<br>&lt;/CMD_EXECUTE&gt;</div><div class='msg user'><b>Humano:</b><br>SISTEMA: [Exito: True]<br>🚀 Desplegando index.html y data.json a /newsletterAI ...<br><br>📋 Resultado: Exito: Despliegue completado en 204.93.224.200/newsletterAI. Archivos: index.html, data.json<br><br>🔄 Intentando subir el script por separado...<br>📋 Resultado script: Exito: Despliegue completado en 204.93.224.200/newsletterAI. Archivos: newsletter_automation.py<br></div><div class='msg assistant'><b>Zirseaz:</b><br>✅ **¡Newsletter desplegado exitosamente en mo-ai.cl/newsletterAI!** 🚀<br><br>| Archivo | Estado |<br>|---|---|<br>| 📄 `index.html` | ✅ Subido |<br>| 📄 `data.json` | ✅ Subido |<br>| 📄 `newsletter_automation.py` | ✅ Subido |<br><br>**URL:** [https://mo-ai.cl/newsletterAI](https://mo-ai.cl/newsletterAI)<br><br>El newsletter es una página premium de suscripción con:<br>- 💎 Diseño dark mode con gradientes<br>- 💳 Integración con Stripe para pagos<br>- 📊 Planes de suscripción (seguramente configurados en data.json)<br><br>¿Quieres que verifique que se vea bien en el navegador o necesitas algo más?</div>
+        </div>
+    </div>
+
+    <!-- Columna Derecha: Estado del Agente -->
+    <div class="col-right">
+        <div class="section" style="grid-column: 1 / -1">
+            <h2>🧠 Skills Adquiridas (14)</h2>
+            <div class="skills-container"><span class="skill-badge" style="border-color:#3b82f6; color:#3b82f6" title="Memoria semantica categorizada (episodica/semantica/procedural) con busqueda TF-IDF y auto-compresion.">memory_manager</span><span class="skill-badge" style="border-color:#3b82f6; color:#3b82f6" title="Forja nuevos sub-agentes con estructura estandar, registro en memoria, y listado.">agent_forge</span><span class="skill-badge" style="border-color:#3b82f6; color:#3b82f6" title="Delega tareas a sub-agentes existentes, invocandolos via LLM con su SKILL.md como system prompt.">agent_orchestrator</span><span class="skill-badge" style="border-color:#3b82f6; color:#3b82f6" title="Crea habilidades con auto-testing: quarantine -> test -> skills_repo. Skills fallidas quedan en quarantine/.">agent_skills</span><span class="skill-badge" style="border-color:#ec4899; color:#ec4899" title="Envia correos electronicos via Gmail SMTP. Usa env_loader centralizado.">email_manager</span><span class="skill-badge" style="border-color:#10b981; color:#10b981" title="Despliega archivos al hosting via FTP. Usa env_loader centralizado. Puede listar archivos remotos.">hosting_manager</span><span class="skill-badge" style="border-color:#8b5cf6; color:#8b5cf6" title="Busqueda web (DuckDuckGo HTML), lectura de URLs, y busqueda de noticias (NewsAPI).">search_skills</span><span class="skill-badge" style="border-color:#8b5cf6; color:#8b5cf6" title="Extrae texto limpio de cualquier URL publica. Usa parser HTML con tag-stack.">web_scraper</span><span class="skill-badge" style="border-color:#f59e0b; color:#f59e0b" title="Utilidades del sistema: gestion de archivos, info del sistema, procesamiento de texto, peticiones HTTP.">utility_skills</span><span class="skill-badge" style="border-color:#f59e0b; color:#f59e0b" title="Ejecucion directa de comandos de terminal (Windows/Linux).">system_skills</span><span class="skill-badge" style="border-color:#6b7280; color:#6b7280" title="Verifica URLs deployadas (200, contenido, texto esperado)">monitoreo_urls</span><span class="skill-badge" style="border-color:#10b981; color:#10b981" title="Deploy con reintento automatico (hasta 2 retries) y rollback si falla">autoheal_deploy</span><span class="skill-badge" style="border-color:#f59e0b; color:#f59e0b" title="Respaldar skills, memorias y config en ZIP con timestamp">backup_total</span><span class="skill-badge" style="border-color:#6b7280; color:#6b7280" title="Dummy math plugin">test_math_plugin</span></div>
+        </div>
+        <div class="section">
+            <h2>📊 LLM Router & Costos</h2>
+            <div class="stat">[ROUTER] Estadisticas LLM:<br>  groq: 0 calls, 0 errors (free/fast)<br>  deepseek: 0 calls, 0 errors (cheap/medium)<br>  gemini: 0 calls, 0 errors (free/medium)<br><hr style="border-color:#2a2e45;margin:8px 0"><br><b>Uso de API</b><br><br>Total historico: 248 llamadas, ~3,578,009 tokens, ~$0.5008 USD<br><br>Hoy (2026-05-13): 3 llamadas, ~29,343 tokens, ~$0.0041 USD<br>  deepseek: 3 calls ($0.14/M)</div>
+        </div>
+        <div class="section">
+            <h2>🎯 Objetivos & Planeación</h2>
+            <div class="stat">- 🟢 [2] Sub-paso 1: Crear un pipeline completo de investigacion (prioridad: low)<br>- 🟢 [3] Sub-paso 2: Despliegue automatizado (prioridad: low)<br>- 🟢 [4] Construccion: Implementar la solucion (prioridad: low)<br>- 🟡 [5] CREAR NIDAS: ecommerce zapatillas en mo-ai.cl/nidas (prioridad: normal)</div>
+        </div>
+        <div class="section" style="grid-column: 1 / -1">
+            <h2>💾 Memoria Core</h2>
+            <div class="stat">[STATS] Estado de Memoria:<br>  - Episodicas: 6<br>  - Semanticas: 8<br>  - Procedurales: 17<br>  - Archivadas: 0<br>  - Core (v4 compat): 31<br>  - Objetivos pendientes: 4<br>  - Objetivos completados: 1</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
